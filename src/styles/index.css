@@ -1,0 +1,42 @@
+textarea {
+    resize: none;
+    min-height: 100px;
+    max-height: 400px;
+    font-weight: 600 !important;
+}
+
+.profile-picture-thumbnail {
+    min-width: 40px;
+    min-height: 40px;
+}
+
+.textarea {
+    position: relative;
+}
+
+.textarea-options {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.1em;
+}
+
+.btn-emoji:focus,
+.btn-emoji:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: 1px solid transparent !important;
+}
+
+.publish-post-container {
+    position: relative;
+}
+
+.emoji-picker-container {
+    position: absolute !important;
+    top: 85%;
+    right: 0;
+}
