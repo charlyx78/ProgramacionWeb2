@@ -1,5 +1,3 @@
-
-
 export function SetTextareaAutoHeight(element, defaultHeight) {
     if(element) {
         const target = element.target ? element.target : element;

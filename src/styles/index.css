@@ -6,7 +6,7 @@
 }
 textarea {
     resize: none;
-    min-height: 150px !important;
+    min-height: 100px !important;
     max-height: 400px;
     font-weight: 600 !important;
     padding-bottom: 2em;
@@ -77,9 +77,8 @@ textarea {
 }
 
 .preview-files-container {
-    padding: 2em 0;
     display: flex;
-    justify-content: center;
+    justify-content: start;
 }
 
 .img-publish-post-container {
@@ -93,5 +92,5 @@ textarea {
 }
 .img-publish-post {
     border: 1px solid var(--color-gris);
-    max-width: 200px;
+    max-width: 400px;
 }
