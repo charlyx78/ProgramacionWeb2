@@ -1,0 +1,70 @@
+@import 'variables.scss';
+
+.sendPost-container {
+    .sendPost-content {
+        display: flex;
+        align-items: start;
+        gap: 1.2em;
+        .sendPost-userPicture-container {
+            .sendPost-userPicture {
+                height: 50px;
+                width: 50px;
+            }
+        }
+        .sendPost-editor-container {
+            width: 100%;
+            .sendPost-editor-form {
+                display: flex;
+                flex-direction: column;
+                gap: 0.8em;
+                .sendPost-textarea {
+                    min-height: 40px !important;
+                    max-height: 200px;
+                    resize: none;
+                    font-size: 1.2em;
+                    &:focus {
+                        box-shadow: none;
+                    }
+                }
+                .sendPost-editor-files-container {
+                    display: flex;
+                    gap: 1em;
+                    overflow-x: auto;
+                    .sendPost-editor-file {
+                        position: relative;
+                        .sendPost-image {
+                            object-fit: cover;
+                            width: 200px;
+                            height: 200px;
+                        }
+                        .sendPost-image-btnRemove {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            margin: 0.6em;
+                        }
+                    }
+                }
+                .sendPost-editor-options-container {
+                    .sendPost-editor-options-content {
+                        width: 100%;
+                        display: flex;
+                        gap: 0.5em;
+                        .sendPost-editor-optionBtn {
+                            background-color: transparent !important;
+                            font-size: 1.2em;
+                            &:hover {
+                                background-color: $color-primary-200 !important;
+                            }
+                        }
+                        .sendPost-editor-postBtn {
+                            padding: 0 2em;
+                            font-size: 1em;
+                            margin-left: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,13 +1,11 @@
-import './components/PublishPost'
-import { Post } from './components/PublishPost'
+import { Post } from './components/SendPost'
 
-function App() {
-
+function App () {
   return (
     <>
       <main className='bg-body-secondary vw-100 vh-100'>
-        <div className="container py-4">
-          <Post/>
+        <div className='container py-4'>
+          <Post />
         </div>
       </main>
     </>
