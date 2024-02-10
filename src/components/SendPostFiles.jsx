@@ -2,13 +2,13 @@ import { getPreviewImage } from '../logic/GetPreviewImage'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons'
 
-export function SendPostFiles ({ filesImages }) {
+export function SendPostFiles ({ removeFileImage, fileImage }) {
   return (
     <div
       className='sendPost-editor-files-container'
     >
-      {filesImages.map((fileImage, index) => (
-        <div className='sendPost-editor-file' key={index}>
+      <div className='sendPost-editor-files-content'>
+        <div className='sendPost-editor-file rounded'>
           <img
             src={getPreviewImage(fileImage)}
             className='sendPost-image rounded border ratio ratio-16x9'
@@ -17,6 +17,7 @@ export function SendPostFiles ({ filesImages }) {
           <button
             type='button'
             className='sendPost-image-btnRemove btn btn-dark'
+            onClick={removeFileImage}
             style={{ zIndex: 1000000 }}
           >
             <FontAwesomeIcon
@@ -24,7 +25,7 @@ export function SendPostFiles ({ filesImages }) {
             />
           </button>
         </div>
-      ))}
+      </div>
     </div>
   )
 }
