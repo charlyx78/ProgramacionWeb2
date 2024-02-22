@@ -42,7 +42,11 @@ export const ThreadPoster = ({
     setInputString(newInputString)
   }
   const removeFile = () => {
-    setFile(null)
+    if (inputString !== '') {
+      setFile(null)
+    } else {
+      toast.error('You cannot remove this image because the post input is empty')
+    }
   }
   // Elimina el componente del thread
   const removePost = () => {
@@ -107,7 +111,7 @@ export const ThreadPoster = ({
                   <FontAwesomeIcon icon={faImage} />
                 </button>
                 <input
-                  type='file' name='file' className='d-none'
+                  type='file' name='file' className='d-none' accept='image/jpeg,image/jgp,image/png'
                   onChange={(e) => {
                     setFile(e.target.files[0])
                     handleUpdatePostFileThread(e.target.files[0])

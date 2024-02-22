@@ -19,6 +19,10 @@ export const ThreadPosterModal = () => {
   const updatePostFile = (file, index) => {
     const newThreadArray = [...threadArray]
     newThreadArray[index].file = file
+    // Si se intenta eliminar una imagen de un post con inputString vacio
+    if (file == null && threadArray[index].text === '') {
+      return
+    }
     setThreadArray(newThreadArray)
   }
 
