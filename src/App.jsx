@@ -1,13 +1,22 @@
-import { Post } from './components/SendPost'
-
+import { ThreadPoster } from './components/ThreadPoster'
+import { ThreadPosterModal } from './components/ThreadPosterModal'
+import toast, { Toaster } from 'react-hot-toast'
 function App () {
   return (
     <>
-      <main className='bg-body-secondary vw-100 vh-100'>
-        <div className='container-fluid py-4'>
-          <Post />
-        </div>
-      </main>
+      <div>
+        <Toaster
+          position='bottom-center'
+          reverseOrder={false}
+        />
+      </div>
+      <div className='container-fluid'>
+        <ThreadPoster
+          isEnabled={false}
+          handleAddToThread=''
+        />
+        <ThreadPosterModal />
+      </div>
     </>
   )
 }

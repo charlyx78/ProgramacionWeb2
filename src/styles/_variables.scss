@@ -2,11 +2,14 @@
 @import '../../node_modules/bootstrap/scss/variables.scss';
 @import '../../node_modules/bootstrap/scss/mixins';
 
-$font-primary: 'Jost', sans-serif;
+$font-primary: "Hind", sans-serif;
+$font-secondary: "Titillium Web", sans-serif;
 $color-primary: $blue;
 $color-primary-200: $blue-200;
 $color-primary-600: $blue-600;
 $color-white: $white;
+$color-gray-300: $gray-300; 
+$color-gray-600: $gray-600; 
 
 $xs: 0;
 $sm: 576px;
