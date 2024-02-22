@@ -22,6 +22,10 @@ export const ThreadPosterModal = () => {
     setThreadArray(newThreadArray)
   }
 
+  useEffect(() => {
+    console.log(threadArray)
+  }, [threadArray])
+
   const removePost = (index) => {
     // No se puede remover el primer elemento del array (post padre)
     if (index !== 0) {

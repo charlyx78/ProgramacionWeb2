@@ -41,6 +41,9 @@ export const ThreadPoster = ({
     const newInputString = e.target.value
     setInputString(newInputString)
   }
+  const removeFile = () => {
+    setFile(null)
+  }
   // Elimina el componente del thread
   const removePost = () => {
     handleRemovePostThread()
@@ -82,7 +85,18 @@ export const ThreadPoster = ({
           {isEnabled && file && (
             // Preview del archivo cargado
             <div className='threadPoster-filePreview-container mb-2'>
-              <img src={getUrlFile(file)} alt='File post' className='threadPoster-filePreview rounded' />
+              <div className='position-relative'>
+                <img src={getUrlFile(file)} alt='File post' className='threadPoster-filePreview rounded' />
+                <button
+                  className='btn-icon text-light bg-dark p-2 rounded position-absolute top-0 end-0 m-2'
+                  onClick={() => {
+                    removeFile()
+                    handleUpdatePostFileThread(null)
+                  }}
+                >
+                  <FontAwesomeIcon icon={faXmarkCircle} />
+                </button>
+              </div>
             </div>
           )}
           {isEnabled && (
