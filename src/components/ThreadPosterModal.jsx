@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { ThreadPoster } from './ThreadPoster'
 import toast from 'react-hot-toast'
 import { v4 as uuid } from 'uuid'
@@ -52,7 +52,6 @@ export const ThreadPosterModal = () => {
     })
     emptyElementFound ? setThreadArrayElementEmpty(true) : setThreadArrayElementEmpty(false)
   }, [threadArray])
-
   /* Crea un nuevo post vacio en el thread */
   const createPost = () => {
     if (!lastPostEmpty) {
@@ -81,8 +80,11 @@ export const ThreadPosterModal = () => {
   return (
     <div className='modal fade' id='threadPosterModal' tabIndex='-1' aria-labelledby='threadPosterModalLabel' aria-hidden='true'>
       <div className='modal-dialog modal-dialog-scrollable'>
-        <h3 className='text-center text-light'>New post</h3>
         <div className='modal-content'>
+          <div className='modal-header'>
+            <h1 className='modal-title fs-5' id='staticBackdropLabel'>New Post</h1>
+            <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close' />
+          </div>
           <div className='modal-body'>
             <div className='threads-container d-flex flex-column gap-3'>
               {threadArray.map(({ id, string, file }, index) => (

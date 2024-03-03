@@ -1,23 +1,19 @@
-import { ThreadPoster } from './components/ThreadPoster'
-import { ThreadPosterModal } from './components/ThreadPosterModal'
 import toast, { Toaster } from 'react-hot-toast'
+import { Outlet } from 'react-router-dom'
+import { MenuBar } from './components/MenuBar'
+
 function App () {
   return (
-    <>
+    <main className='d-flex container'>
+      <MenuBar />
+      <Outlet />
       <div>
         <Toaster
           position='bottom-center'
           reverseOrder={false}
         />
       </div>
-      <div className='container-fluid'>
-        <ThreadPoster
-          isEnabled={false}
-          handleAddToThread=''
-        />
-        <ThreadPosterModal />
-      </div>
-    </>
+    </main>
   )
 }
 
