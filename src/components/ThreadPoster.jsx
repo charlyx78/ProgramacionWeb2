@@ -13,7 +13,8 @@ export const ThreadPoster = ({
   handleUpdatePostFileThread,
   handleRemovePostThread,
   isFirstPost,
-  isLastPost
+  isLastPost,
+  ...props
 }) => {
   const [showComponent, setShowComponent] = useState(true)
 

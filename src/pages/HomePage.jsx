@@ -3,12 +3,15 @@ import { ThreadPosterModal } from '../components/ThreadPosterModal'
 
 export const HomePage = () => {
   return (
-    <main className='container'>
+    <main className='feed'>
 
-      <ThreadPoster
-        isEnabled={false}
-        handleAddToThread=''
-      />
+      <div className='feed-component'>
+        <ThreadPoster
+          isEnabled={false}
+          handleAddToThread=''
+        />
+
+      </div>
       <ThreadPosterModal />
 
     </main>

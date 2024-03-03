@@ -9,7 +9,7 @@ p, textarea, input {
     font-size: 1.3em;
 }
 
-@media (min-width: $md) {
+@media (min-width: $xl) {
     .modal-dialog {
         max-width: 30% !important;
     }
