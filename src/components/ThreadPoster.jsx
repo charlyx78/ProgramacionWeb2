@@ -1,64 +1,49 @@
-import { useEffect, useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage, faSmile, faXmarkCircle } from '@fortawesome/free-regular-svg-icons'
 import { UserImage } from './UserImage'
 import { SetTextareaAutoHeight } from '../logic/SetTextareaAutoHeight'
-import toast from 'react-hot-toast'
 import reactLogo from '../assets/react.svg'
 
 export const ThreadPoster = ({
   isEnabled,
   inputStringValue,
-  handleNewPostThread,
+  fileValue,
   handleUpdatePostStringThread,
   handleUpdatePostFileThread,
   handleRemovePostThread,
+  isFirstPost,
   isLastPost
 }) => {
-  // Estado del input string del textarea
+  const [showComponent, setShowComponent] = useState(true)
+
+
+  // Valor del texto
   const [inputString, setInputString] = useState(inputStringValue)
-  // Estado para monitorear si este componente ya ha agregado una publicacion al hilo o no
-  const [lastPost, setLastPost] = useState(isLastPost)
-  // Estado para almacenar los archivos
-  const [file, setFile] = useState(null)
+
+  // Valor del archivo cargado
+  const [file, setFile] = useState(fileValue)
+
   // Referencia al input file
   const hiddenFileInput = useRef(null)
-  const handleFileInputClick = event => {
+  const handleFileInputClick = () => {
     hiddenFileInput.current.click()
   }
-  // Solo si el inputString no es vacio, procede a crear un nuevo post
-  const createNewPost = () => {
-    if (inputString !== '' || file !== null) {
-      setLastPost(false)
-      handleNewPostThread()
-    } else {
-      toast.error('You cannot add an empty post')
-    }
-  }
-  // Actualiza el estado d e inputString al activarse el evento
-  // onChange del textarea, sirve para imprimir correctamente los textos
-  const updateInputString = (e) => {
-    const newInputString = e.target.value
-    setInputString(newInputString)
-  }
-  const removeFile = () => {
-    if (inputString !== '') {
-      setFile(null)
-    } else {
-      toast.error('You cannot remove this image because the post input is empty')
-    }
-  }
+
   // Elimina el componente del thread
-  const removePost = () => {
+  const removePostThread = () => {
+    setShowComponent(false)
     handleRemovePostThread()
   }
+
   // Obtener url del file cargado
-  const getUrlFile = (file) => {
-    return URL.createObjectURL(file)
+  const getUrlFile = (fileValue) => {
+    return URL.createObjectURL(fileValue)
   }
 
   return (
     <>
+    {showComponent && (
       <div className='threadPoster d-flex gap-3 position-relative'>
         <div className='d-flex flex-column'>
           <UserImage
@@ -74,27 +59,27 @@ export const ThreadPoster = ({
         </div>
         <section className='d-flex flex-column gap-1 w-100'>
           <textarea
+            /* Si el componente NO esta habilitado para edicion, entonces se convierte en un acceso al modal de hilos */
+            {...(!isEnabled ? { 'data-bs-toggle': 'modal', 'data-bs-target': '#threadPosterModal' } : {})}
             className='threadPoster-textarea'
             readOnly={!isEnabled}
             placeholder='What is happening?'
             onChange={(e) => {
               SetTextareaAutoHeight(e)
-              updateInputString(e)
-              handleUpdatePostStringThread(e)
+              setInputString(e.target.value)
+              handleUpdatePostStringThread(e.target.value)
             }}
             value={inputStringValue}
-            // Si el componente NO esta habilitado para edicion, entonces se convierte en un acceso al modal de hilos
-            {...(!isEnabled ? { 'data-bs-toggle': 'modal', 'data-bs-target': '#threadPosterModal' } : {})}
           />
+          {/* Preview del archivo cargado */}
           {isEnabled && file && (
-            // Preview del archivo cargado
             <div className='threadPoster-filePreview-container mb-2'>
               <div className='position-relative'>
-                <img src={getUrlFile(file)} alt='File post' className='threadPoster-filePreview rounded' />
+                <img src={getUrlFile(fileValue)} alt='File post' className='threadPoster-filePreview rounded' />
                 <button
                   className='btn-icon text-light bg-dark p-2 rounded position-absolute top-0 end-0 m-2'
                   onClick={() => {
-                    removeFile()
+                    setFile(null)
                     handleUpdatePostFileThread(null)
                   }}
                 >
@@ -122,23 +107,20 @@ export const ThreadPoster = ({
                   <FontAwesomeIcon icon={faSmile} />
                 </button>
               </div>
-              {isLastPost && (
-                // El boton 'Add to Thread' solo se muestra si no se ha agregado un post previamente en el componente
-                <a href='#' className='text-secondary' onClick={createNewPost}>Add another post</a>
-              )}
             </div>
           )}
         </section>
-        {isEnabled && isLastPost && (
-          // El boton 'Remove from Thread' solo se muestra si no se ha agregado un post previamente en el componente
+        {isEnabled && (inputString === '' && file === null && !isFirstPost) && (
+          // Solo se activa la opcion de eliminar hilo a aquellos que estan vacios y sean diferentes al hilo padre
           <button
             className='btn-icon position-absolute end-0'
-            onClick={removePost}
+            onClick={removePostThread}
           >
             <FontAwesomeIcon icon={faXmarkCircle} />
           </button>
         )}
       </div>
+    )}
     </>
   )
 }

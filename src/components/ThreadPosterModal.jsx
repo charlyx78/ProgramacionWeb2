@@ -1,37 +1,74 @@
 import { useEffect, useState } from 'react'
 import { ThreadPoster } from './ThreadPoster'
 import toast from 'react-hot-toast'
+import { v4 as uuid } from 'uuid'
 
 export const ThreadPosterModal = () => {
-  // Estado con el array de las publicaciones del hilo
-  const [threadArray, setThreadArray] = useState([{ text: '', file: null }])
+  /* Array de post */
+  const [threadArray, setThreadArray] = useState([
+    {
+      id: uuid(),
+      string: '',
+      file: null
+    }])
 
-  const createPost = () => {
-    const newThreadArray = [...threadArray, { text: '', file: null }]
-    setThreadArray(newThreadArray)
-  }
+  /* Bool: verifica si el post es el ultimo en el thread */
+  const [lastPostEmpty, setLastPostEmpty] = useState(true)
 
-  const updatePostString = (e, index) => {
+  /* Bool: veritica si hay un elemento vacio en el thread */
+  const [threadArrayElementEmpty, setThreadArrayElementEmpty] = useState(false)
+
+  /* Actualiza los valores de texto de un post en el thread */
+  const updatePostString = (newPostStringValue, index) => {
     const newThreadArray = [...threadArray]
-    newThreadArray[index].text = e.target.value
-    setThreadArray(newThreadArray)
-  }
-  const updatePostFile = (file, index) => {
-    const newThreadArray = [...threadArray]
-    newThreadArray[index].file = file
-    // Si se intenta eliminar una imagen de un post con inputString vacio
-    if (file == null && threadArray[index].text === '') {
-      return
-    }
+    newThreadArray[index].string = newPostStringValue
     setThreadArray(newThreadArray)
   }
 
+  /* Actualiza el valor del archivo cargado de un post en el thread */
+  const updatePostFile = (newFileValue, index) => {
+    const newThreadArray = [...threadArray]
+    newThreadArray[index].file = newFileValue
+    setThreadArray(newThreadArray)
+  }
+
+  /* Verifica que el ultimo post sea vacio o no */
   useEffect(() => {
-    console.log(threadArray)
+    const threadArrayLastIndex = threadArray[threadArray.length - 1]
+    if (threadArrayLastIndex.string === '' && threadArrayLastIndex.file === null) {
+      setLastPostEmpty(true)
+    } else {
+      setLastPostEmpty(false)
+    }
   }, [threadArray])
 
+  /* Verifica que ningun post en el array este vacio */
+  useEffect(() => {
+    let emptyElementFound = false
+    threadArray.forEach((thread) => {
+      if (thread.string === '' && thread.file === null) {
+        emptyElementFound = true
+      }
+    })
+    emptyElementFound ? setThreadArrayElementEmpty(true) : setThreadArrayElementEmpty(false)
+  }, [threadArray])
+
+  /* Crea un nuevo post vacio en el thread */
+  const createPost = () => {
+    if (!lastPostEmpty) {
+      const newThreadArray = [...threadArray,
+        {
+          id: uuid(),
+          string: '',
+          file: null
+        }]
+      setThreadArray(newThreadArray)
+    }
+  }
+
+  /* Elimina un post del thread */
   const removePost = (index) => {
-    // No se puede remover el primer elemento del array (post padre)
+    /* No se puede remover el primer elemento del array (post padre) */
     if (index !== 0) {
       const newThreadArray = [...threadArray]
       newThreadArray.splice(index, 1)
@@ -43,28 +80,42 @@ export const ThreadPosterModal = () => {
 
   return (
     <div className='modal fade' id='threadPosterModal' tabIndex='-1' aria-labelledby='threadPosterModalLabel' aria-hidden='true'>
-      <div className='modal-dialog'>
+      <div className='modal-dialog modal-dialog-scrollable'>
         <h3 className='text-center text-light'>New post</h3>
         <div className='modal-content'>
           <div className='modal-body'>
             <div className='threads-container d-flex flex-column gap-3'>
-              {threadArray.map(({ text, file }, index) => (
-                // Itera sobre el array y crea componentes de ThreadPoster, por defecto se creara uno ya que el indice 0 del array contiene un dato nulo (eliminarse en backend)
+              {threadArray.map(({ id, string, file }, index) => (
+                /* Itera sobre el array y crea componentes de ThreadPoster */
                 <ThreadPoster
-                  key={index}
+                  key={id}
                   isEnabled
-                  inputStringValue={text}
-                  handleNewPostThread={createPost}
-                  handleUpdatePostStringThread={(e) => updatePostString(e, index)}
-                  handleUpdatePostFileThread={(file) => updatePostFile(file, index)}
+                  inputStringValue={string}
+                  fileValue={file}
+                  handleUpdatePostStringThread={(newPostStringValue) => updatePostString(newPostStringValue, index)}
+                  handleUpdatePostFileThread={(newFileValue) => updatePostFile(newFileValue, index)}
                   handleRemovePostThread={() => { removePost(index) }}
+                  isFirstPost={index === 0}
                   isLastPost={index === threadArray.length - 1}
                 />
               ))}
             </div>
           </div>
           <div className='modal-footer'>
-            <button className='btn btn-secondary rounded-pill px-3' onClick={() => { console.log(threadArray) }}>Post</button>
+            <button
+              className='btn-icon text-primary fs-3 rounded-pill px-3'
+              onClick={createPost}
+              hidden={!!lastPostEmpty}
+            >
+              <i className='bi bi-plus-circle' />
+            </button>
+            <button
+              className='btn btn-primary rounded-pill px-3'
+              onClick={() => { console.log(threadArray) }}
+              disabled={!!lastPostEmpty || threadArrayElementEmpty}
+            >
+              Post
+            </button>
           </div>
         </div>
       </div>
