@@ -2,12 +2,15 @@
 @import '../../node_modules/bootstrap/scss/variables.scss';
 @import '../../node_modules/bootstrap/scss/mixins';
 
-$font-primary: "Hind", sans-serif;
-$font-secondary: "Titillium Web", sans-serif;
+$font-logo: "Montserrat", sans-serif;
+$font-text: "Hind Vadodara", sans-serif;
+$font-header: "Raleway", sans-serif;
 $color-primary: $blue;
-$color-primary-200: $blue-200;
-$color-primary-600: $blue-600;
+$color-blue-200: $blue-200;
+$color-blue-600: $blue-600;
 $color-white: $white;
+$color-gray-100: $gray-100; 
+$color-gray-200: $gray-200; 
 $color-gray-300: $gray-300; 
 $color-gray-500: $gray-500; 
 $color-gray-600: $gray-600; 

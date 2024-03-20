@@ -1,4 +1,10 @@
-@import 'variables.scss';
+@import '../variables.scss';
+
+.menubar-container {
+    height: 94vh;
+    position: sticky;
+    top: 16px;
+}
 
 .nav-link {
     display: flex;
@@ -7,19 +13,17 @@
     color: black !important;
     background-color: transparent !important;
     text-decoration: none;
+    font-size: 1.2em !important;
     &:hover {
         background-color: $color-gray-300 !important;
     }
 
     i {
         color: $color-gray-500;
-        font-size: 1.4em;
-    }
-}
-.active {
-    font-weight: 700 !important;
-    i {
-        color: black;
+        font-size: 1.2em !important;
     }
 }
 
+.menubar-item-user {
+    padding: 0 16px !important;
+}

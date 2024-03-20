@@ -18,7 +18,7 @@ app.post('/login', (req, res) => {
         res.status(200).send();
     }
     else{
-        res.status(402).send();
+        res.status(404).send();
     }
     
 });

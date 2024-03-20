@@ -1,0 +1,67 @@
+@import '../variables.scss';
+
+.login-background-container {
+    display: none;
+    background-image: linear-gradient(225deg, rgba(130, 89, 219, 0.2),rgba(44, 192, 226, 0.2),rgba(182, 103, 181, 0.2)),linear-gradient(315deg, rgb(39, 20, 149),rgb(65, 82, 185),rgb(91, 144, 220));
+    height: 100vh;
+}
+
+.login-background-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    height: 100%;
+    justify-content: center;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    h1 {
+        font-size: 3.6em;
+        font-weight: 800;
+    }
+    h2 {
+        font-weight: 500;
+        font-size: 4em;
+    }
+}
+
+.login-content {
+    height: 100%;
+    width: 90%;
+    margin-top: 1.6em;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.8em;
+}
+
+.login-content-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4em;
+}
+
+@media (min-width: $md) {
+    .login-content {
+        width: 80%;
+    }
+}
+
+@media (min-width: $lg) {
+    .login-background-container {
+        display: block;
+    }
+    .login-content {
+        margin-top: 0;
+        width: 90%;
+        align-items: start;
+    }
+    .login-container {
+        position: relative; 
+        display: grid;
+        grid-template-columns: 1fr 0.7fr;
+    }
+}

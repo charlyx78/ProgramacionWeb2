@@ -1,0 +1,12 @@
+@import '../variables.scss';
+
+.post-buttons-container {
+    display: flex;
+    gap: 2em;
+}
+
+.post-content { 
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}

@@ -1,10 +1,26 @@
 @import 'variables.scss';
 
-p, textarea, input {
-    font-size: 1.3em !important;
-    font-family: $font-primary;
-    font-weight: 500;
+@media (min-width: $lg) {
+    .container {
+        width: 60%;
+    }
 }
+
+h1 {
+     font-family: $font-header;
+}
+
+p, textarea, input, label, a {
+    font-size: 1.1em !important;
+    font-family: $font-text;
+    font-weight: 400;
+}
+
+.btn { 
+    font-family: $font-header !important;
+    font-weight: 600 !important;
+}
+
 .nav-link {
     font-size: 1.3em;
 }
@@ -20,4 +36,42 @@ ul {
     padding: 0;
 }
 
+.logo {
+    font-family: $font-logo;
+    color: $blue-600;
+    font-weight: bold;
+    text-decoration: none !important;
+    margin: 0;
+}
 
+.logo-landing {
+    font-size: 3em;
+}
+
+@media (min-width: $xs) {
+    .offcanvas {
+        max-width: 80% !important;
+    }
+}
+
+.card { 
+    border: none;
+    .card-header { 
+        border: none;
+        background-color: white;
+        padding-bottom: 0;
+
+    }
+    .card-footer { 
+        border: none;
+        background-color: white;
+        padding-top: 0;
+    }
+}
+
+.active {
+    font-weight: bold !important;
+    i {
+        color: $color-primary !important;
+    }
+}

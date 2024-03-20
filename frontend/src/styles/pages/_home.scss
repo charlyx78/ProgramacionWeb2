@@ -1,0 +1,23 @@
+@import '../variables.scss';
+
+.home-content {
+    width: 95%;
+    margin: 0 auto;
+}
+
+@media (min-width: $md) {
+    .home-content {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: $lg) {
+    .home-content {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        column-gap: 2em;
+        width: 80%;
+    }
+}
+

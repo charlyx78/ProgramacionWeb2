@@ -10,6 +10,34 @@
     }
 }
 
+.text-primary {
+    color: $blue !important;
+}
+
+.btn-primary {
+    background-color: $blue !important;
+    &:hover {
+        background-color: $color-blue-600 !important;
+    }
+}
+
+.btn-outline-primary {
+    border: 1px solid $blue !important;
+    color: $blue;
+    &:hover, &:focus, &:active {
+        background-color: $blue !important;
+        color: $color-white;
+    }
+}
+
+.bg-primary {
+    background-color: $blue !important;
+}
+
+.bg-gray-100 {
+    background-color: $color-gray-100;
+}
+
 .profileImage {
     border: 1px solid $color-gray-300;
     border-radius: 50%;
@@ -24,4 +52,19 @@
     align-items: center;
     background-color: transparent;
     color: $color-gray-600;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+}
+
+
+.padding-top-content {
+    padding-top: 1em;
+}
+
+.padding-bottom-content {
+    padding-bottom: 1em;
 }
