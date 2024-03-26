@@ -9,37 +9,52 @@ export const MenuBar = () => {
 
   return (
     <>
-      <div className='menubar-container shadow-sm card d-flex flex-column py-2 d-none d-lg-block'>
+      <div className='card bg-transparent menubar-container rounded-0 border-end d-flex flex-column py-2 d-none d-lg-block'>
         <ul className='card-body nav nav-pills flex-column mb-auto menubar-content h-100'>
-          <NavLink to='/Feed' className='logo fs-3 mb-4 text-center'>Trendingverse</NavLink>
+          <li className="nav-item">
+            <NavLink to='/Feed' className='logo mb-3 nav-link'>
+              <h3 className='fw-bold m-0 text-primary logo-menubar'>Trendingverse</h3>
+            </NavLink>
+          </li>
           <li className='nav-item'>
             <NavLink to='/Feed' className='nav-link'>
-              <i className='bi bi-house-door-fill fs-3' />
+              <i className='bi bi-house-door-fill' />
               Home
             </NavLink>
           </li>
           <li className='nav-item'>
             <NavLink to='/Login' className='nav-link'>
-              <i className='bi bi-search fs-3' />
+              <i className='bi bi-search' />
               Search   
             </NavLink>
           </li>
           <li className='nav-item'>
             <NavLink to='/Profile' className='nav-link'>
-              <i className='bi bi-person-fill fs-3' />
+              <i className='bi bi-person-fill' />
               Profile
             </NavLink>
           </li>
           <li className='nav-item'>
             <NavLink to='/Login' className='nav-link'>
-              <i className='bi bi-bell-fill fs-3' />
+              <i className='bi bi-bell-fill' />
               Notifications
             </NavLink>
           </li>
           <li className='nav-item'>
             <NavLink to='/Login' className='nav-link'>
-              <i className='bi bi-chat-fill fs-3' />
+              <i className='bi bi-chat-fill' />
               Chat
+            </NavLink>
+          </li>
+          <li className='nav-item'>
+            <NavLink to='/Login' className='nav-link'>
+              <i className='bi bi-bookmark-fill' />
+              Saved
+            </NavLink>
+          </li>
+          <li className='nav-item mt-4'>
+            <NavLink to='/create-post' className='btn btn-primary btn w-100'>
+              Post
             </NavLink>
           </li>
           <li className='nav-item dropup mt-auto d-flex menubar-item-user'>
@@ -49,7 +64,10 @@ export const MenuBar = () => {
               aria-expanded='false'
             >
               <UserImage sourceImage={reactLogo} />
-              {getUser()?.userName}
+              <div className='d-flex flex-column align-items-start'>
+                <p className='fw-bold m-0'>{getUser()?.name}</p>
+                <p className='text-muted m-0'>@{getUser()?.userName}</p>       
+              </div>
             </button>
             <ul className='dropdown-menu text-small'>
               <li>

@@ -51,10 +51,11 @@ export const ThreadPoster = ({
 
   return (
     <>
-      <div className='threadPoster card shadow-sm border-0'>
+      <div className='threadPoster card bg-transparent border-bottom rounded-0'>
         <div className='card-body d-flex gap-3 align-items-start'>
           <UserImage
-            link=''
+            width='36px'
+            height='36px'
             sourceImage={reactLogo}
           />
           <section className='d-flex flex-column gap-1 w-100'>
@@ -114,7 +115,7 @@ export const ThreadPoster = ({
           {isEnabled && (inputString === '' && file === null && !isFirstPost) && (
           // Solo se activa la opcion de eliminar hilo a aquellos que estan vacios y sean diferentes al hilo padre
             <button
-              className='btn-icon position-absolute end-0'
+              className='btn-icon position-absolute end-0 me-2'
               onClick={removePostThread}
             >
               <FontAwesomeIcon icon={faXmarkCircle} />

@@ -26,13 +26,17 @@ export const FeedPage = () => {
 
   return (
     <main className='feed-container'>
-      <div className='feed-content'>
-        <div className='feed-poster mb-3'>
-          {/* POSTER DEl HOME */}
-          <ThreadPoster
-            isEnabled={false}
-          />
+      <div className="page-header position-sticky top-0 border-bottom container-fluid py-2">
+        <div className="d-flex justify-content-around">
+          <button className="btn" type='button'>For you</button>
+          <button className="btn" type='button'>Following</button>
         </div>
+      </div>
+      <div className='feed-content'>
+        {/* POSTER DEl HOME */}
+        <ThreadPoster
+          isEnabled={false}
+        />
         <div className='feed-posts-container'>
           {postsFeed.map((post) => {
             if (post.parent) {

@@ -3,7 +3,6 @@
 .create-post-container {
     display: flex;
     flex-direction: column;
-    gap: 1em;
     min-height: 100vh;
 }
 
@@ -28,5 +27,4 @@
 .posts-container {
     display: flex;
     flex-direction: column;
-    gap: 1em;
 }

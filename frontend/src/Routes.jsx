@@ -9,6 +9,7 @@ import { LoginPage } from './pages/LoginPage'
 import { FeedPage } from './pages/FeedPage'
 import { SignUpPage } from './pages/SignUpPage'
 import { CreatePost } from './pages/CreatePost'
+import { ProfileSettingsPage } from './pages/ProfileSettingsPage'
 
 export const Routes = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const Routes = createBrowserRouter([
           {
             path: 'profile',
             element: <ProfilePage />
+          },
+          {
+            path: 'profile-settings',
+            element: <ProfileSettingsPage />
           },
           {
             path: 'feed',

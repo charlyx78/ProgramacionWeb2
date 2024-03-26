@@ -1,9 +1,9 @@
 @import '../variables.scss';
 
 .menubar-container {
-    height: 94vh;
+    height: 100vh;
     position: sticky;
-    top: 16px;
+    top: 0;
 }
 
 .nav-link {
@@ -26,4 +26,10 @@
 
 .menubar-item-user {
     padding: 0 16px !important;
+}
+
+.logo-menubar {
+    color: $color-blue-400 !important;
+    font-size: 26px;
+    font-family: $font-logo;
 }

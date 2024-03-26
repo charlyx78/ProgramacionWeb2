@@ -137,7 +137,7 @@ export const CreatePost = () => {
   }
 
   return (
-    <main className='create-post-container page-container container container-wide container-border'>
+    <main className='create-post-container page-container container-border'>
       <div className='create-post-buttons-container container-fluid py-3'>
         <button
           className='btn-icon fs-3 text-dark' onClick={() => {
@@ -167,7 +167,7 @@ export const CreatePost = () => {
       <div className='posts-container'>
         {threadArray.map(({ id, stringContent, fileContent }, index) => (
           /* Itera sobre el array y crea componentes de ThreadPoster */
-          <div key={id} className='post container-fluid'>
+          <div key={id} className='post'>
             <ThreadPoster
               isEnabled
               inputStringValue={stringContent}

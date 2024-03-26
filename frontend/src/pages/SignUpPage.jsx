@@ -98,7 +98,7 @@ export const SignUpPage = () => {
         <div className='signup-content'>
 
           <div className='signup-content-header'>
-            <h1 className='fw-bold m-0 fs-2 text-center'>Create your account</h1>
+            <h3 className='fw-bold m-0 text-center'>Create your account</h3>
             <div className='progress' role='progressbar' aria-label='Basic example' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style={{ height: '2px' }}>
               <div className='progress-bar bg-primary' style={{ width: `${((currentStepIndex) / steps.length) * 100}%` }} />
             </div>

@@ -6,12 +6,16 @@
     }
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
      font-family: $font-header;
 }
 
+h1 {
+    font-size: 38px !important;
+}
+
 p, textarea, input, label, a {
-    font-size: 1.1em !important;
+    font-size: 18px !important;
     font-family: $font-text;
     font-weight: 400;
 }
@@ -22,7 +26,7 @@ p, textarea, input, label, a {
 }
 
 .nav-link {
-    font-size: 1.3em;
+    font-size: 1.2em !important;
 }
 
 @media (min-width: $xl) {
@@ -38,7 +42,7 @@ ul {
 
 .logo {
     font-family: $font-logo;
-    color: $blue-600;
+    color: $color-blue-400;
     font-weight: bold;
     text-decoration: none !important;
     margin: 0;
@@ -70,8 +74,8 @@ ul {
 }
 
 .active {
-    font-weight: bold !important;
+    font-weight: 700 !important;
     i {
-        color: $color-primary !important;
+        color: $color-blue-400 !important;
     }
 }

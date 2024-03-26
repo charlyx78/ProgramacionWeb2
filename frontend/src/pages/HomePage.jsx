@@ -19,10 +19,10 @@ export const HomePage = () => {
   }, [getUser, navigate])
 
   return (
-    <div className='bg-gray-100'>
+    <div className='bg-white'>
       <div className='home-container'>
         <NavBarTop></NavBarTop>
-        <div className="home-content container-fluid padding-top-content padding-bottom-content">
+        <div className="home-content">
           <MenuBar />
           <Outlet />
           <TrendingBar />

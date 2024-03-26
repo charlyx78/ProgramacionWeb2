@@ -1,8 +1,37 @@
 @import '../variables.scss';
 
+.post-button {
+    font-size: 14px;
+}
+
+.post-name {
+    font-size: 18px !important;
+    font-weight: 600;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+.post-username {
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+    
+// }
+
 .post-buttons-container {
+    width: 100%;
     display: flex;
-    gap: 2em;
+    justify-content: space-between;
+    .post-button {
+        &:hover {
+            color: $color-blue-400;
+        }
+    }
+}
+
+.post-container {
+    .card-body {
+        padding: 14px 18px;
+    }
 }
 
 .post-content { 

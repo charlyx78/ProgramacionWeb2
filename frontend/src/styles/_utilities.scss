@@ -15,23 +15,25 @@
 }
 
 .btn-primary {
-    background-color: $blue !important;
+    background-color: $color-blue-400 !important;
+    border: 0;
     &:hover {
         background-color: $color-blue-600 !important;
     }
 }
 
 .btn-outline-primary {
-    border: 1px solid $blue !important;
-    color: $blue;
+    border: 1px solid $color-blue-400 !important;
+    color: $color-blue-400;
     &:hover, &:focus, &:active {
-        background-color: $blue !important;
+        background-color: $color-blue-600 !important;
+        border-color: $color-blue-600 !important;
         color: $color-white;
     }
 }
 
 .bg-primary {
-    background-color: $blue !important;
+    background-color: $color-blue-400 !important;
 }
 
 .bg-gray-100 {
@@ -39,10 +41,7 @@
 }
 
 .profileImage {
-    border: 1px solid $color-gray-300;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
 }
 
 .btn-icon {
@@ -66,5 +65,24 @@
 }
 
 .padding-bottom-content {
-    padding-bottom: 1em;
+    padding-bottom: 2em;
 }
+
+.page-header {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 1;
+    button {
+        border: none !important;
+        border-radius: 0 !important;
+        border-bottom: 4px solid transparent !important;
+        &:active {
+            border: none !important;
+        }
+        &:focus {
+            border: none !important;
+            border-bottom: 4px solid $color-blue-400 !important;
+        }
+    }
+} 
