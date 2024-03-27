@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useUser } from '../contexts/UserContext'
 import { NavBarTop } from '../components/NavBarTop'
 import { MenuBar } from '../components/MenuBar'
-import { TrendingBar } from '../components/TrendingBar'
+import { TrendingBar } from '../components/TrendingBar/TrendingBar'
 
 export const HomePage = () => {
   const { getUser } = useUser()

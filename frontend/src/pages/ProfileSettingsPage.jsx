@@ -1,14 +1,10 @@
 import React from 'react'
+import { PeageHeader } from '../components/PeageHeader'
 
 export const ProfileSettingsPage = () => {
   return (
-    <div className="card shadow-sm">
-      <div className="card-body">
-        <form action="">
-          <label htmlFor="name">Name</label>
-          <input type="text" className='form-control' />
-        </form>
-      </div>
-    </div>
+    <main className="profile-settings-container">
+      <PeageHeader title='Profile Settings'></PeageHeader>
+    </main>
   )
 }

@@ -17,13 +17,13 @@ export const MenuBar = () => {
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/Feed' className='nav-link'>
+            <NavLink to='/feed' className='nav-link'>
               <i className='bi bi-house-door-fill' />
               Home
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/Login' className='nav-link'>
+            <NavLink to='/search' className='nav-link'>
               <i className='bi bi-search' />
               Search   
             </NavLink>
@@ -35,7 +35,7 @@ export const MenuBar = () => {
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/Login' className='nav-link'>
+            <NavLink to='/notifications' className='nav-link'>
               <i className='bi bi-bell-fill' />
               Notifications
             </NavLink>

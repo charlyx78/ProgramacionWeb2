@@ -7,17 +7,17 @@ export const NavBarBottom = () => {
       <div className='container'>
         <ul className='navbar-nav d-flex flex-row w-100 justify-content-around'>
           <li className='nav-item'>
-            <NavLink to='/Feed' className='nav-link active'>
+            <NavLink to='/feed' className='nav-link'>
               <i className='bi bi-house-door-fill fs-3' />
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/Login' className='nav-link'>
+            <NavLink to='/search' className='nav-link'>
               <i className='bi bi-search fs-3' />
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/Login' className='nav-link'>
+            <NavLink to='/notifications' className='nav-link'>
               <i className='bi bi-bell-fill fs-3' />
             </NavLink>
           </li>

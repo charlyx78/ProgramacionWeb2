@@ -13,7 +13,7 @@ export const Post = ({ postObject }) => {
 
           <div className="row w-100">
             <div className="col-10 pe-0">
-              <div className="d-flex gap-2 overflow-hiddem">
+              <div className="d-flex gap-2 overflow-hidden">
                 <p className='m-0 post-name text-break' title='Carlos Adrian Ruiz Hernandez'>Carlos Adrian Ruiz Hernandez</p>
                 <p className='m-0 post-username text-muted fw-light text-nowrap post-username'>@charly78ruiz</p>
               </div>
@@ -44,7 +44,7 @@ export const Post = ({ postObject }) => {
                   <button className='btn-icon post-button' title='Saved'><i className='bi bi-bookmark me-2'></i> 112</button>  
                 </div>
               </div>
-              <div className="d-none col-md-4 d-md-flex justify-content-end gap-3">
+              <div className="d-none col-md-4 d-md-flex justify-content-end gap-3 pe-0">
                 <button className='btn-icon post-button' title='Sended'><i className='bi bi-send me-2'></i></button>
                 <button className='btn-icon post-button' title='Seen'><i className='bi bi-bar-chart me-2'></i> 112</button>  
               </div>

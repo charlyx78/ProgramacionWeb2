@@ -15,7 +15,7 @@ h1 {
 }
 
 p, textarea, input, label, a {
-    font-size: 18px !important;
+    font-size: 16px !important;
     font-family: $font-text;
     font-weight: 400;
 }
@@ -77,5 +77,11 @@ ul {
     font-weight: 700 !important;
     i {
         color: $color-blue-400 !important;
+    }
+}
+
+.list-group-item {
+    &:hover {
+        background-color: $color-gray-300;
     }
 }

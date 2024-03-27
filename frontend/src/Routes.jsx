@@ -10,6 +10,8 @@ import { FeedPage } from './pages/FeedPage'
 import { SignUpPage } from './pages/SignUpPage'
 import { CreatePost } from './pages/CreatePost'
 import { ProfileSettingsPage } from './pages/ProfileSettingsPage'
+import { NotificationsPage } from './pages/NotificationsPage'
+import { SearchPage } from './pages/SearchPage'
 
 export const Routes = createBrowserRouter([
   {
@@ -43,6 +45,14 @@ export const Routes = createBrowserRouter([
           {
             path: 'feed',
             element: <FeedPage />
+          },
+          {
+            path: 'search',
+            element: <SearchPage />
+          },
+          {
+            path: 'notifications',
+            element: <NotificationsPage />
           }
         ]
       },
