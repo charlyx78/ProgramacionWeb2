@@ -5,9 +5,10 @@ import { SearchInput } from '../components/SearchInput/SearchInput'
 export const SearchPage = () => {
   return (
     <main className="search-container">
-      <PeageHeader title='Search'></PeageHeader>
-      <section className="search-content container-fluid padding-top-content">
+      <PeageHeader showBackButton='false'>
         <SearchInput></SearchInput>
+      </PeageHeader>
+      <section className="search-content container-fluid position-relative padding-top-content">
       </section>
     </main>
   )

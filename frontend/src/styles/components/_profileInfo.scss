@@ -1,7 +1,7 @@
 @import '../variables.scss';
 
 .profile-info-cover-container {
-    background-color: $color-gray-300;
+    background-color: $body-secondary-bg;
     height: 200px;
 }
 
@@ -9,8 +9,8 @@
     width: 125px;
     height: 125px;
     margin-top: -12.5%;
-    background-color: $color-gray-300;
-    border: 4px solid $color-white;
+    background-color: $body-secondary-bg;
+    border: 4px solid $gray-100;
 }
 
 .profile-into-content {

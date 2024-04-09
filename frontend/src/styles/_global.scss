@@ -1,87 +1,19 @@
 @import 'variables.scss';
 
-@media (min-width: $lg) {
-    .container {
-        width: 60%;
-    }
-}
-
-h1, h2, h3, h4, h5, h6 {
-     font-family: $font-header;
-}
-
-h1 {
-    font-size: 38px !important;
-}
-
-p, textarea, input, label, a {
-    font-size: 16px !important;
-    font-family: $font-text;
-    font-weight: 400;
-}
-
-.btn { 
-    font-family: $font-header !important;
-    font-weight: 600 !important;
-}
-
-.nav-link {
-    font-size: 1.2em !important;
-}
-
-@media (min-width: $xl) {
-    .modal-dialog {
-        max-width: 30% !important;
+.logo
+{
+    font-weight: $font-weight-bold;
+    font-size: $font-size-lg;
+    i {
+        display: inline-block;
+        transform-origin: center;
+        transform: rotate(45deg) !important;
     }
 }
 
 ul {
-    list-style: none;
     padding: 0;
 }
-
-.logo {
-    font-family: $font-logo;
-    color: $color-blue-400;
-    font-weight: bold;
-    text-decoration: none !important;
-    margin: 0;
-}
-
-.logo-landing {
-    font-size: 3em;
-}
-
-@media (min-width: $xs) {
-    .offcanvas {
-        max-width: 80% !important;
-    }
-}
-
-.card { 
-    border: none;
-    .card-header { 
-        border: none;
-        background-color: white;
-        padding-bottom: 0;
-
-    }
-    .card-footer { 
-        border: none;
-        background-color: white;
-        padding-top: 0;
-    }
-}
-
-.active {
-    font-weight: 700 !important;
-    i {
-        color: $color-blue-400 !important;
-    }
-}
-
-.list-group-item {
-    &:hover {
-        background-color: $color-gray-300;
-    }
+li {
+    list-style: none;
 }

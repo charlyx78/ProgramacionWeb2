@@ -9,7 +9,12 @@ export const ProfilePage = () => {
   return (
     <>
       <main className='account-container'>
-        <PeageHeader title='Carlos Ruiz' subtitle='0 posts'></PeageHeader>
+        <PeageHeader>
+          <div className="flex flex-column">
+            <h5 className="m-0">Carlos Ruiz</h5>
+            <p className='m-0 text-muted'>@charly78ruiz</p>
+          </div>
+        </PeageHeader>
         <ProfileInfo />
         <div className='account-content card-body'>
         </div>

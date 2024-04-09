@@ -51,7 +51,7 @@ export const ThreadPoster = ({
 
   return (
     <>
-      <div className='threadPoster card bg-transparent border-bottom rounded-0'>
+      <div className='post-container card border-0 border-top border-bottom rounded-0'>
         <div className='card-body d-flex gap-3 align-items-start'>
           <UserImage
             width='36px'
@@ -62,7 +62,7 @@ export const ThreadPoster = ({
             <textarea
               /* Si el componente NO esta habilitado para edicion, entonces se convierte en un acceso al modal de hilos */
               {...(!isEnabled ? { onClick: handleHiddenNavigation } : {})}
-              className='threadPoster-textarea'
+              className='threadPoster-textarea bg-transparent'
               readOnly={!isEnabled}
               placeholder='What is happening?'
               onChange={(e) => {
@@ -94,7 +94,7 @@ export const ThreadPoster = ({
             // Solo se muestran las opciones si el componente esta habilitado para su edicion
               <div className='threadPoster-buttons d-flex justify-content-between'>
                 <div className=' d-flex gap-3'>
-                  <button className='btn-icon' onClick={handleFileInputClick}>
+                  <button className='btn btn-icon' onClick={handleFileInputClick}>
                     <FontAwesomeIcon icon={faImage} />
                   </button>
                   <input
@@ -105,7 +105,7 @@ export const ThreadPoster = ({
                     }}
                     ref={hiddenFileInput}
                   />
-                  <button className='btn-icon'>
+                  <button className='btn btn-icon'>
                     <FontAwesomeIcon icon={faSmile} />
                   </button>
                 </div>
@@ -115,7 +115,7 @@ export const ThreadPoster = ({
           {isEnabled && (inputString === '' && file === null && !isFirstPost) && (
           // Solo se activa la opcion de eliminar hilo a aquellos que estan vacios y sean diferentes al hilo padre
             <button
-              className='btn-icon position-absolute end-0 me-2'
+              className='btn btn-icon position-absolute end-0 me-2'
               onClick={removePostThread}
             >
               <FontAwesomeIcon icon={faXmarkCircle} />

@@ -27,13 +27,13 @@ export const Routes = createBrowserRouter([
         element: <SignUpPage />
       },
       {
-        path: 'create-post',
-        element: <CreatePost />
-      },
-      {
         path: '',
         element: <HomePage />,
         children: [
+          {
+            path: 'create-post',
+            element: <CreatePost />
+          },
           {
             path: 'profile',
             element: <ProfilePage />

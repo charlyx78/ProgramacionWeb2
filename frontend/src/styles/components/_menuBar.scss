@@ -1,35 +1,58 @@
 @import '../variables.scss';
 
-.menubar-container {
-    height: 100vh;
-    position: sticky;
-    top: 0;
-}
+// .menubar-container {
+//     .list-group-item {
+//         display: flex;
+//         align-items: center;
+//         gap: 12px;
+//         border: none;
+//         font-size: 20px !important;
+//         i {
+//             font-size: 22px;
+//         }
+//         color: $gray-500;
+//         &:hover {
+//             background-color: $gray-700 !important;
+//         }
+//     }
+//     .list-group-item.active {
+//         background-color: transparent !important;
+//         color: $gray-200 !important;
+//         i {
+//             color: $gray-200 !important;
+//         }
+//     }
+//     .list-group-item.logo {
+//         color: $color-gray-200 !important;
+//         font-size: 22px !important;
+//     }
 
-.nav-link {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    color: black !important;
-    background-color: transparent !important;
-    text-decoration: none;
-    font-size: 1.2em !important;
-    &:hover {
-        background-color: $color-gray-300 !important;
+//     .menubar-content {
+//         position: sticky;
+//         top: 16px;
+//     }
+//     min-height: 100vh;
+// }
+
+// .trends-container {
+//     background-color: $gray-800;
+// }
+.menubar-container{
+    .menubar-content {
+        top: 16px;
+        .menubar-item {
+            display: flex;
+            gap: 12px;
+            border: none;
+            margin: 0 auto;
+            font-size: $font-size-lg;
+        }
+        .menubar-item.active {
+            background-color: $body-secondary-bg;
+            color: $body-color;
+            font-weight: $font-weight-semibold;
+            border-radius: 0 !important;
+            border-right: 3px solid $primary;
+        }
     }
-
-    i {
-        color: $color-gray-500;
-        font-size: 1.2em !important;
-    }
-}
-
-.menubar-item-user {
-    padding: 0 16px !important;
-}
-
-.logo-menubar {
-    color: $color-blue-400 !important;
-    font-size: 26px;
-    font-family: $font-logo;
 }

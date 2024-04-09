@@ -14,14 +14,14 @@ export const SearchInput = () => {
   }
 
   return (
-    <div>
+    <div className='w-100'>
       <input 
         onChange={(e) => {setSearchString(e.target.value)}}
         onFocus={handleShowListResults} 
         onBlur={handleHideListResults} 
         autoComplete='off' 
         type="text" 
-        className='form-control search-input border-0 rounded-pill py-2 position-relative' 
+        className='form-control search-input rounded-pill w-100 py-2 position-relative px-3' 
         placeholder='Search' 
       />
       <div className={showListResults ? 'd-block' : 'd-none'}>

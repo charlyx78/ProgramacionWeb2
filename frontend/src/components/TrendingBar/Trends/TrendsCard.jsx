@@ -3,10 +3,12 @@ import { TrendItem } from './TrendItem'
 
 export const TrendsCard = () => {
   return (
-    <section className="trends-container card bg-light">
-      <div className="trends-content py-3">
-        <h5 className='fw-bold mb-4 px-3'>What is happening</h5>
-        <ul className="trends-list d-flex flex-column gap-2 mb-0">
+    <section className="trends-container card bg-body-tertiary">
+      <div className="trends-content card-body">
+        <h5 className='mb-3 px-3 fw-bold'>Trendings</h5>
+        <ul className="trends-list list-group">
+          <TrendItem></TrendItem>
+          <TrendItem isNew={true}></TrendItem>
           <TrendItem></TrendItem>
           <TrendItem></TrendItem>
           <TrendItem></TrendItem>

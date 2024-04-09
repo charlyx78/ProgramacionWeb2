@@ -1,31 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { MenuBarItem } from './MenuBarItem'
 
 export const NavBarBottom = () => {
   return (
-    <nav className='navbar fixed-bottom navbar-expand-sm navbar-light bg-white navbar-bottom d-lg-none'>
+    <nav className='navbar fixed-bottom navbar-expand-sm bg-body d-lg-none border-top'>
       <div className='container'>
-        <ul className='navbar-nav d-flex flex-row w-100 justify-content-around'>
-          <li className='nav-item'>
-            <NavLink to='/feed' className='nav-link'>
-              <i className='bi bi-house-door-fill fs-3' />
-            </NavLink>
-          </li>
-          <li className='nav-item'>
-            <NavLink to='/search' className='nav-link'>
-              <i className='bi bi-search fs-3' />
-            </NavLink>
-          </li>
-          <li className='nav-item'>
-            <NavLink to='/notifications' className='nav-link'>
-              <i className='bi bi-bell-fill fs-3' />
-            </NavLink>
-          </li>
-          <li className='nav-item'>
-            <NavLink to='/Login' className='nav-link'>
-              <i className='bi bi-chat-fill fs-3' />
-            </NavLink>
-          </li>
+        <ul className='navbar-bottom navbar-nav d-flex flex-row w-100 justify-content-around'>
+          <MenuBarItem url='/feed' icon='house'></MenuBarItem>
+          <MenuBarItem url='/search' icon='search'></MenuBarItem>
+          <MenuBarItem url='/create-post' icon='plus-circle'></MenuBarItem>
+          <MenuBarItem url='/profile' icon='person'></MenuBarItem>
+          <MenuBarItem url='/notifications' icon='bell'></MenuBarItem>
+
         </ul>
       </div>
     </nav>

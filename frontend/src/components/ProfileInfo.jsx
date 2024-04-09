@@ -10,7 +10,7 @@ export const ProfileInfo = () => {
         <div className='profile-into-content w-100'>
           <div className='d-flex justify-content-between align-items-end mb-3'>
             <img src='' className='profile-info-image rounded-circle' alt='Profile Picture' />
-            <NavLink to='/profile-settings' className='btn btn-outline-dark btn-sm'>
+            <NavLink to='/profile-settings' className='btn btn-outline-light btn-sm'>
               Edit profile
             </NavLink>
           </div>

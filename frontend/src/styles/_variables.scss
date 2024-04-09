@@ -1,24 +1,6 @@
-@import '../../node_modules/bootstrap/scss/functions.scss';
-@import '../../node_modules/bootstrap/scss/variables.scss';
-@import '../../node_modules/bootstrap/scss/mixins';
+@import '../../node_modules/bootstrap/scss/functions';
+@import '../../node_modules/bootstrap/scss/variables';
 
-$font-logo: "Montserrat", sans-serif;
-$font-text: "Hind Vadodara", sans-serif;
-$font-header: "Raleway", sans-serif;
-$color-primary: $blue;
-$color-blue-200: $blue-200;
-$color-blue-400: $blue-400;
-$color-blue-600: $blue-600;
-$color-white: $white;
-$color-gray-100: $gray-100; 
-$color-gray-200: $gray-200; 
-$color-gray-300: $gray-300; 
-$color-gray-500: $gray-500; 
-$color-gray-600: $gray-600; 
+$font-family-base: Arial, Helvetica, sans-serif;
 
-$xs: 0;
-$sm: 576px;
-$md: 768px;
-$lg: 992px;
-$xl: 1200px;
-$xxl: 1400px;
+// @import "../../node_modules/bootstrap/scss/bootstrap";

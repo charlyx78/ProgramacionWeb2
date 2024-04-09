@@ -19,16 +19,14 @@ export const HomePage = () => {
   }, [getUser, navigate])
 
   return (
-    <div className='bg-white'>
-      <div className='home-container'>
-        <NavBarTop></NavBarTop>
-        <div className="home-content">
-          <MenuBar />
-          <Outlet />
-          <TrendingBar />
-        </div>
-        <NavBarBottom></NavBarBottom>
-      </div> 
-    </div>
+    <div className='home-container'>
+      <NavBarTop></NavBarTop>
+      <div className="home-content container-lg">
+        <MenuBar />
+        <Outlet />
+        <TrendingBar />
+      </div>
+      <NavBarBottom></NavBarBottom>
+    </div> 
   )
 }

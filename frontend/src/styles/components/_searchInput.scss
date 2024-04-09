@@ -1,9 +1,11 @@
+@import '../variables.scss';
+
 .search-input {
-    background-color: $color-gray-300;
+    background-color: $body-secondary-bg;
 }
 
 .list-search-results {
     width: 90%;
     max-height: 400px !important;
-    overflow-y: scroll;
+    overflow-y: auto;
 }

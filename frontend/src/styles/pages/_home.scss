@@ -1,22 +1,14 @@
 @import '../variables.scss';
 
-.home-content {
-    width: 100%;
-    margin: 0 auto;
-}
-
-@media (min-width: $md) {
+.home-container {
     .home-content {
-        width: 90%;
-        margin: 0 auto;
+        padding: 0;
     }
-}
-
-@media (min-width: $lg) {
-    .home-content {
-        display: grid;
-        grid-template-columns: 1fr 2fr 1fr;
-        width: 80%
+    @media (min-width: 960px) {
+        .home-content {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+        }
     }
 }
 

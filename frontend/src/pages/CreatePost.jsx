@@ -5,6 +5,7 @@ import toast from 'react-hot-toast'
 import { v4 as uuid } from 'uuid'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '../contexts/UserContext'
+import { PeageHeader } from '../components/PeageHeader'
 
 export const CreatePost = () => {
   /** Hook de usuario */
@@ -137,18 +138,12 @@ export const CreatePost = () => {
   }
 
   return (
-    <main className='create-post-container page-container container-border'>
-      <div className='create-post-buttons-container container-fluid py-3'>
-        <button
-          className='btn-icon fs-3 text-dark' onClick={() => {
-            if (confirm('Are you sure you want go back? You will loose your post')) { navigate(-1) }
-          }}
-        >
-          <i className='bi bi-chevron-left' />
-        </button>
-        <div className='d-flex gap-3'>
+    <main className='create-post-container bg-body-tertiary'>
+      <PeageHeader>
+        <h5 className='m-0'>Create post</h5>
+        <div className='ms-auto'>
           <button
-            className='btn-icon text-primary fs-3 rounded-pill px-3'
+            className='btn btn-icon text-primary fs-3 rounded-pill px-3'
             onClick={createPost}
             hidden={!!lastPostEmpty}
             title='Create thread'
@@ -163,8 +158,8 @@ export const CreatePost = () => {
             Post
           </button>
         </div>
-      </div>
-      <div className='posts-container'>
+      </PeageHeader>
+      <div className='posts-container d-flex flex-column gap-3 min-vh-100'>
         {threadArray.map(({ id, stringContent, fileContent }, index) => (
           /* Itera sobre el array y crea componentes de ThreadPoster */
           <div key={id} className='post'>

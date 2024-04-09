@@ -1,5 +1,9 @@
 @import '../variables.scss';
 
 .navbar-bottom {
-    border-top: 1px solid $color-gray-200;
+    .menubar-item {
+        display: flex;
+        justify-content: center;
+        font-size: $font-size-lg;
+    }
 }
