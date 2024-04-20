@@ -8,22 +8,22 @@ export const createPost = async (req, res) => {
     const {
         content,
         attachment,
-        user,
         parent,
-        tags
+        tags,
+        user
     } = req.body
     try {
         const newPost = new Post({
             content,
             attachment,
-            user,
             parent,
-            tags
+            tags,
+            user: req.user.id
         })
 
         await newPost.save()
 
-        res.status(200).json({ 
+        res.status(201).json({ 
             message: "Post created successfully",
          })
     } catch (error) {
@@ -35,9 +35,9 @@ export const replyPost = async (req, res) => {
     const {
         content,
         attachment,
-        user,
         parent,
-        tags
+        tags,
+        user
     } = req.body
 
     try {
@@ -46,14 +46,14 @@ export const replyPost = async (req, res) => {
         const newReply = new Post({
             content,
             attachment,
-            user,
             parent: parentPost,
-            tags
+            tags,
+            user: req.user.id
         })
 
         await newReply.save()
 
-        res.status(200).json({ 
+        res.status(201).json({ 
             message: "Post replied successfully",
         })
     } catch (error) {
@@ -71,7 +71,7 @@ export const getPost = async (req, res) => {
             message: "Post not found"
         })
 
-        res.status(201).json({ 
+        res.status(200).json({ 
             id: post.id,
             content: post.content,
             attachment: post.attachment,
@@ -105,7 +105,7 @@ export const deletePost = async (req, res) => {
             message: "Post not found"
         })
     
-        res.status(200).json({ 
+        res.status(204).json({ 
             message: "Post deleted successfully"
          })
     } catch (error) {
