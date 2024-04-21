@@ -1,0 +1,9 @@
+@import '../variables.scss';
+
+.navbar-bottom {
+    .menubar-item {
+        display: flex;
+        justify-content: center;
+        font-size: $font-size-lg;
+    }
+}

@@ -1,9 +1,9 @@
-export const UserImage = ({ link, sourceImage }) => {
+import React from 'react'
+
+export const UserImage = ({ width = '36px', height = '36px', sourceImage }) => {
   return (
     <aside>
-      <a href={link}>
-        <img src={sourceImage} alt='User Image' className='profileImage' />
-      </a>
+      <img src={sourceImage} alt='User Image' className='bg-body-secondary rounded-circle' style={{width: width, height: height}} />
     </aside>
   )
 }

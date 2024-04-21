@@ -1,0 +1,14 @@
+@import '../variables.scss';
+
+.home-container {
+    .home-content {
+        padding: 0;
+    }
+    @media (min-width: 960px) {
+        .home-content {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+        }
+    }
+}
+

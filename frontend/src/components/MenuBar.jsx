@@ -1,36 +1,25 @@
+import React from 'react'
+import { MenuBarItem } from './MenuBarItem'
 import { NavLink } from 'react-router-dom'
+// import { UserImage } from './UserImage'
+// import reactLogo from '../assets/react.svg'
+import { useUser } from '../contexts/UserContext'
+import { ProfileMenuBar } from './ProfileMenuBar'
 
 export const MenuBar = () => {
+  const { getUser, logoutUser } = useUser()
+
   return (
-    <div className='d-flex flex-column flex-shrink-0 p-3 border-end' style={{ width: '280px', height: '100vh' }}>
-      <ul className='nav nav-pills flex-column mb-auto'>
-        <li className='nav-item'>
-          <NavLink
-            to='/Home'
-            className='nav-link rounded-pill'
-          >
-            <i className='bi bi-house-door-fill' />
-            Home
-          </NavLink>
-        </li>
-        <li className='nav-item'>
-          <NavLink
-            to='/Account'
-            className='nav-link rounded-pill'
-          >
-            <i className='bi bi-person-fill' />
-            Account
-          </NavLink>
-        </li>
-      </ul>
-      <div>
-        <NavLink
-          to='/Account'
-          className='d-flex align-items-center link-body-emphasis text-decoration-none'
-        >
-          <img src='https://github.com/mdo.png' alt='' width='32' height='32' className='rounded-circle me-2' />
-          Charly78Ruiz
-        </NavLink>
+    <div className="menubar-container list-group list-group-flush border-end d-none d-lg-block min-vh-100">
+      <div className="menubar-content position-sticky pe-3">
+        <div className='mb-3 ps-3 logo fs-3'><i className="bi bi-dice-6-fill"></i><span className='ms-3'>dice</span></div>
+        <ProfileMenuBar></ProfileMenuBar>
+        <MenuBarItem url='/feed' icon='house'>Feed</MenuBarItem>
+        <MenuBarItem url='/search' icon='search'>Search</MenuBarItem>
+        <MenuBarItem url='/profile' icon='person'>Profile</MenuBarItem>
+        <MenuBarItem url='/notifications' icon='bell'>Notifications</MenuBarItem>
+        <MenuBarItem url='/saved' icon='bookmark'>Saved</MenuBarItem>
+        <NavLink to='create-post' className='btn btn-primary mt-4 ms-3'>Create Post</NavLink>
       </div>
     </div>
   )

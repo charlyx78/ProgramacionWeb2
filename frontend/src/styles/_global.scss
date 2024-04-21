@@ -1,23 +1,19 @@
 @import 'variables.scss';
 
-p, textarea, input {
-    font-size: 1.3em !important;
-    font-family: $font-primary;
-    font-weight: 500;
-}
-.nav-link {
-    font-size: 1.3em;
-}
-
-@media (min-width: $xl) {
-    .modal-dialog {
-        max-width: 30% !important;
+.logo
+{
+    font-weight: $font-weight-bold;
+    font-size: $font-size-lg;
+    i {
+        display: inline-block;
+        transform-origin: center;
+        transform: rotate(45deg) !important;
     }
 }
 
 ul {
-    list-style: none;
     padding: 0;
 }
-
-
+li {
+    list-style: none;
+}

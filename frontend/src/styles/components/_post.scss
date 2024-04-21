@@ -1,0 +1,78 @@
+@import '../variables.scss';
+
+// .post-button {
+//     font-size: 15px;
+// }
+
+// .post-name {
+//     font-size: 18px !important;
+//     font-weight: 600;
+//     text-wrap: nowrap;
+//     overflow: hidden;
+// }
+// .post-username {
+//     text-wrap: nowrap;
+//     overflow: hidden;
+// }
+    
+// .post-buttons-container {
+//     .post-button {
+//         &:hover {
+//             color: $color-blue-400;
+//         }
+//     }
+// }
+
+// .post-container {
+//     background-color: transparent !important;
+//     color:$gray-200;
+// }
+
+// .post-content { 
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1em;
+// }
+.post-container {
+    .post-buttons-container {
+        .post-button {
+            padding: 0;
+            background-color: transparent;
+            border: 0;
+            display: flex;
+            gap: 8px;
+            font-size: $font-size-sm;
+            color: $text-muted;
+            &:nth-child(1) {
+                &:hover {
+                    color: $danger;
+                }
+            }
+            &:nth-child(2) {
+                &:hover {
+                    color: $blue;
+                }
+            }
+            &:nth-child(3) {
+                &:hover {
+                    color: $green;
+                }
+            }
+            &:nth-child(4) {
+                &:hover {
+                    color: $purple;
+                }
+            }
+            &:nth-child(5) {
+                &:hover {
+                    color: $secondary;
+                }
+            }
+            &:nth-child(6) {
+                &:hover {
+                    color: $teal;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+@import '../variables.scss';
+
+.search-input {
+    background-color: $body-secondary-bg;
+}
+
+.list-search-results {
+    width: 90%;
+    max-height: 400px !important;
+    overflow-y: auto;
+}
