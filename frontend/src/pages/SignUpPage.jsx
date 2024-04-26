@@ -1,29 +1,52 @@
-import React from 'react'
+import { React, useEffect } from 'react'
 import { useMultiStepForm } from '../logic/MultiStepForm'
 import { UserForm } from '../components/SignUpForms/UserForm'
 import { BiographyForm } from '../components/SignUpForms/BiographyForm'
 import { UserImageForm } from '../components/SignUpForms/UserImageForm'
+import { TagsForm } from '../components/SignUpForms/TagsForm'
 import { PasswordForm } from '../components/SignUpForms/PasswordForm'
-import toast from 'react-hot-toast'
 import { useState } from 'react'
-import { v4 as uuid } from 'uuid'
-import { validateMatchedPasswords, validatePassword, validateUserName } from '../logic/ValidateSignupForm'
+import { useForm } from 'react-hook-form'
+import { useAuth } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 export const SignUpPage = () => {
+
+  const navigate = useNavigate()
+
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm()
+
+  const { signUp, isAuthenticated, errors: registerErrors } = useAuth()
+
+  // Redirige a Home si ya hay una sesion iniciada
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/Feed')
+    }
+  }, [isAuthenticated])
+
+  useEffect(() => {
+    registerErrors.map((error, i) => {
+      toast.error(error.message)
+    })
+  }, [registerErrors])
+
   const INITIAL_DATA = {
-    id: uuid(),
     name: '',
+    lastName: '',
     userName: '',
     email: '',
-    birthDay: '',
+    birthDate: '',
     biography: '',
-    userImage: '',
-    uerCoverImage: '',
+    picture: '',
+    coverPicture: '',
+    tags: [],
     password: '',
     confirmPassword: '',
-    registrationDate: ''
   }
+
+  const [data, setData] = useState(INITIAL_DATA)
 
   const updateFields = (fields) => {
     setData(prev => {
@@ -31,9 +54,15 @@ export const SignUpPage = () => {
     })
   }
 
-  const navigate = useNavigate()
+  const onSubmit = handleSubmit(async (values) => { 
+    if (!isLastStep) {
+      next()
+    }
+    else {
+      signUp(values)
+    }
+  })
   
-  const [data, setData] = useState(INITIAL_DATA)
 
   const {
     steps,
@@ -44,57 +73,19 @@ export const SignUpPage = () => {
     back,
     next
   } = useMultiStepForm([
-    <UserForm {...data} updateFields={updateFields} />,
-    <BiographyForm {...data} updateFields={updateFields} />,
-    <UserImageForm {...data} updateFields={updateFields} />,
-    <PasswordForm {...data} updateFields={updateFields} />
+    <TagsForm register={register} errors={errors} {...data} updateFields={updateFields}></TagsForm>,
+    <UserForm register={register} errors={errors} {...data} updateFields={updateFields} />,
+    <BiographyForm register={register} errors={errors} {...data} updateFields={updateFields} />,
+    <UserImageForm register={register} setValue={setValue} errors={errors} {...data} updateFields={updateFields} />,
+    <PasswordForm register={register} errors={errors} {...data} updateFields={updateFields} />
   ])
-
-  const createUser = () => {
-    data.registrationDate = new Date()
-    
-    fetch('http://localhost:3000/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    }).then((res) => {
-      toast.success('User created successfully, you can log in now')
-      navigate('/Login')
-    }).catch((err) => {
-      toast.error(err)
-    })
-  }
-
-  const onSubmit = async (e) => {
-    e.preventDefault()
-    if (!isLastStep) {
-      /** Validaciones formulario usuario */
-      if (currentStepIndex === 0) {
-        if (!(await validateUserName(data.userName))) {
-          next()
-        } else {
-          toast.error('Username already exists. Try with another one')
-        }
-      } else {
-        next()
-      }
-    } else {
-      /** Validaciones formulario contrasenas */
-      if (validatePassword(data.password)) {
-        if (!validateMatchedPasswords(data.password, data.confirmPassword)) {
-          toast.error('Passwords don\'t match')
-        } else {
-          createUser()
-        }
-      } else {
-        toast.error('Password must contain 8 characters or more, upper case, lower case, a number and a symbol')
-      }
-    }
-  }
 
   return (
     <main className='signup-container container padding-top-content'>
-      <form onSubmit={onSubmit}>
+      <form 
+        onSubmit={ onSubmit }
+        encType='multipart/form-data'
+      >
         <div className='signup-content'>
 
           <div className='signup-content-header'>

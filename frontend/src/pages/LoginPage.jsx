@@ -1,54 +1,34 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useEffect, useState } from 'react'
-import { useNavigate, NavLink } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useNavigate, NavLink, Navigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import { useUser } from '../contexts/UserContext'
+import { useAuth } from '../contexts/AuthContext'
+import { ErrorAlert } from '../components/ErrorAlert'
 
 export const LoginPage = () => {
-  const { loginUser, getUser } = useUser()
+
   const navigate = useNavigate()
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const { register, handleSubmit, formState: { errors } } = useForm()
 
-  // Redirige a Home si ya hay una sesion iniciada
+  const { signIn, isAuthenticated, errors: signInErrors } = useAuth()
+  
+  const onSubmit = handleSubmit(async (data) => {
+    signIn(data)
+  })
+
   useEffect(() => {
-    if (getUser()) {
-      navigate('/Feed')
-    }
-  }, [getUser, navigate])
-
-  // Funcion para el login con la base de datos
-  const handleLogin = () => {
-    if (username !== '' && password !== '') {
-      fetch(`http://localhost:3000/users?userName=${username}`).then((res) => {
-        if (!res) {
-          throw new Error(res)
-        }
-        return res.json()
-      }).then((users) => {
-        // Toma el primer (unico) resultado de la respuesta
-        const user = users[0]
-        if (!user) {
-          toast.error('Please enter a valid username')
-        } else if (user.password === password) {
-          loginUser(user)
-          toast.success('Logged successfully')
-          navigate('/feed')
-        } else {
-          toast.error('Please enter valid credentials')
-        }
-      }).catch((err) => {
-        toast.error(`Login failed due to: ${err.message}`)
-      })
-    } else {
-      toast.error('Type a username and a password to continue')
-    }
-  }
-
+    signInErrors.map((error, i) => {
+      toast.error(error)
+    })
+  }, [signInErrors])
+  
   const handleGoogleLogin = () => {
     alert('Patience. This function will be enable soon :)')
   }
+
+  if(isAuthenticated) return <Navigate to='/feed' replace />
 
   return (
     <main className='login-container'>
@@ -70,23 +50,45 @@ export const LoginPage = () => {
       <div className='login-content'>
         <h1 className='logo text-primary fs-3 d-lg-none'>Trendingverse</h1>
         <h3 className='fw-bold mb-3 text-start fs-2'>Hi, Welcome Back!👋</h3>
-        <div className='d-flex flex-column w-100 gap-4'>
+        <form className='d-flex flex-column w-100 gap-4' onSubmit={onSubmit}>
           <div className='form-field'>
-            <label htmlFor='username'>Username</label>
-            <input type='text' name='username' onChange={(e) => { setUsername(e.target.value) }} className='form-control' placeholder='Username' />
+            <label htmlFor='email'>Email</label>
+            <input 
+              autoFocus
+              {...register('email', { required: 'Email is required.' })}
+              type='text' 
+              name='email' 
+              className='form-control' placeholder='Email' 
+            />
+            {errors.email && (
+              <ErrorAlert>
+                {errors.email.message}
+              </ErrorAlert>
+            )}
           </div>
           <div className='form-field mb-3'>
             <label htmlFor='password'>Password</label>
-            <input type='password' name='password' onChange={(e) => { setPassword(e.target.value) }} className='form-control' placeholder='Password' />
+            <input 
+              {...register('password', { required: 'Password is required.' })}
+              type='password' 
+              name='password' 
+              className='form-control' 
+              placeholder='Password'
+            />
+            {errors.password && (
+              <ErrorAlert>
+                {errors.password.message}
+              </ErrorAlert>
+            )}
           </div>
           <div className='login-content-buttons'>
-            <button className='btn btn-primary w-100' onClick={handleLogin}>Login</button>
-            <button className='btn btn-outline-dark w-100' onClick={handleGoogleLogin}>Continue with Google</button>
+            <button className='btn btn-primary w-100' type='submit'>Login</button>
+            <button className='btn bg-body-secondary w-100' type='button' onClick={handleGoogleLogin}>Continue with Google</button>
           </div>
-        </div>
+        </form>
         <div className='d-flex'>
           <p className='m-0'>
-                      You don&apos;t have an account?
+            You don&apos;t have an account?
           </p>
           <NavLink
             to='/Signup'

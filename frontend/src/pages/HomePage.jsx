@@ -1,22 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavBarBottom } from '../components/NavBarBottom'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import { useUser } from '../contexts/UserContext'
 import { NavBarTop } from '../components/NavBarTop'
 import { MenuBar } from '../components/MenuBar'
 import { TrendingBar } from '../components/TrendingBar/TrendingBar'
+import { useAuth } from '../contexts/AuthContext'
 
 export const HomePage = () => {
-  const { getUser } = useUser()
-  const navigate = useNavigate()
 
-  // Redirige a login page si no hay una sesion iniciada
-  useEffect(() => {
-    if (!getUser()) {
-      navigate('/Login')
-    }
-  }, [getUser, navigate])
+  const { user, isAuthenticated, loading } = useAuth()
+
+  if(loading) return <h1>Loading...</h1>
+  if(!loading && !isAuthenticated) return <Navigate to='/login' replace />
 
   return (
     <div className='home-container'>

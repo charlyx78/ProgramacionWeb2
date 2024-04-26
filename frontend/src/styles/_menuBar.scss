@@ -1,0 +1,25 @@
+@import 'variables.scss';
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    color: black !important;
+    background-color: transparent !important;
+    text-decoration: none;
+    &:hover {
+        background-color: $color-gray-300 !important;
+    }
+
+    i {
+        color: $color-gray-500;
+        font-size: 1.4em;
+    }
+}
+.active {
+    font-weight: 700 !important;
+    i {
+        color: black;
+    }
+}
+

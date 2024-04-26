@@ -9,22 +9,19 @@ import { NavLink } from 'react-router-dom'
 
 export const ThreadPoster = ({
   isEnabled,
-  inputStringValue,
-  fileValue,
-  handleUpdatePostStringThread,
-  handleUpdatePostFileThread,
-  handleRemovePostThread,
-  isFirstPost,
-  isLastPost,
-  ...props
+  content,
+  attachment,
+  handleUpdateContent,
+  handleUpdateAttachment,
+  handleRemovePostElement,
+  isFirstPost
 }) => {
-  const [showComponent, setShowComponent] = useState(true)
 
   // Valor del texto
-  const [inputString, setInputString] = useState(inputStringValue)
+  const [contentValue, setContentValue] = useState(content)
 
   // Valor del archivo cargado
-  const [file, setFile] = useState(fileValue)
+  const [attachmentValue, setAttachmentValue] = useState(attachment)
 
   // Referencia al input file
   const hiddenFileInput = useRef(null)
@@ -40,13 +37,12 @@ export const ThreadPoster = ({
 
   // Elimina el componente del thread
   const removePostThread = () => {
-    setShowComponent(false)
-    handleRemovePostThread()
+    handleRemovePostElement()
   }
 
   // Obtener url del file cargado
-  const getUrlFile = (fileValue) => {
-    return URL.createObjectURL(fileValue)
+  const getUrlFile = (content) => {
+    return URL.createObjectURL(content)
   }
 
   return (
@@ -67,22 +63,22 @@ export const ThreadPoster = ({
               placeholder='What is happening?'
               onChange={(e) => {
                 SetTextareaAutoHeight(e)
-                setInputString(e.target.value)
-                handleUpdatePostStringThread(e.target.value)
+                setContentValue(e.target.value)
+                handleUpdateContent(e.target.value)
               }}
-              value={inputStringValue}
+              value={contentValue}
             />
             <NavLink to='/create-post' ref={hiddenNavigation} />
             {/* Preview del archivo cargado */}
-            {isEnabled && file && (
+            {isEnabled && attachmentValue && (
               <div className='threadPoster-filePreview-container mb-2'>
                 <div className='position-relative'>
-                  <img src={getUrlFile(fileValue)} alt='File post' className='threadPoster-filePreview rounded' />
+                  <img src={getUrlFile(attachmentValue)} alt='File post' className='threadPoster-filePreview rounded' />
                   <button
                     className='btn-icon text-light bg-dark p-2 rounded position-absolute top-0 end-0 m-2'
                     onClick={() => {
-                      setFile(null)
-                      handleUpdatePostFileThread(null)
+                      setAttachmentValue('')
+                      handleUpdateAttachment('')
                     }}
                   >
                     <FontAwesomeIcon icon={faXmarkCircle} />
@@ -100,8 +96,8 @@ export const ThreadPoster = ({
                   <input
                     type='file' name='file' className='d-none' accept='image/jpeg,image/jgp,image/png'
                     onChange={(e) => {
-                      setFile(e.target.files[0])
-                      handleUpdatePostFileThread(e.target.files[0])
+                      setAttachmentValue(e.target.files[0])
+                      handleUpdateAttachment(e.target.files[0])
                     }}
                     ref={hiddenFileInput}
                   />
@@ -112,7 +108,7 @@ export const ThreadPoster = ({
               </div>
             )}
           </section>
-          {isEnabled && (inputString === '' && file === null && !isFirstPost) && (
+          {isEnabled && (contentValue === '' && attachmentValue === '' && !isFirstPost) && (
           // Solo se activa la opcion de eliminar hilo a aquellos que estan vacios y sean diferentes al hilo padre
             <button
               className='btn btn-icon position-absolute end-0 me-2'

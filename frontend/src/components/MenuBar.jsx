@@ -1,13 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { MenuBarItem } from './MenuBarItem'
 import { NavLink } from 'react-router-dom'
-// import { UserImage } from './UserImage'
-// import reactLogo from '../assets/react.svg'
-import { useUser } from '../contexts/UserContext'
 import { ProfileMenuBar } from './ProfileMenuBar'
+import { useAuth } from '../contexts/AuthContext'
 
 export const MenuBar = () => {
-  const { getUser, logoutUser } = useUser()
+
+  const { user: userLogged, getUserData } = useAuth()
 
   return (
     <div className="menubar-container list-group list-group-flush border-end d-none d-lg-block min-vh-100">
@@ -16,7 +15,7 @@ export const MenuBar = () => {
         <ProfileMenuBar></ProfileMenuBar>
         <MenuBarItem url='/feed' icon='house'>Feed</MenuBarItem>
         <MenuBarItem url='/search' icon='search'>Search</MenuBarItem>
-        <MenuBarItem url='/profile' icon='person'>Profile</MenuBarItem>
+        <MenuBarItem url={`/profile/${userLogged.id}`} icon='person'>Profile</MenuBarItem>
         <MenuBarItem url='/notifications' icon='bell'>Notifications</MenuBarItem>
         <MenuBarItem url='/saved' icon='bookmark'>Saved</MenuBarItem>
         <NavLink to='create-post' className='btn btn-primary mt-4 ms-3'>Create Post</NavLink>

@@ -27,9 +27,19 @@ export const registerSchema = z.object({
     }).refine((password) => regex.test(password), {
         message: "Password must contain at least one number, one symbol, and one uppercase letter",
     }),
-    user_picture: z.string({
-        required_error: "User picture must be a string path",
-    }).optional()
+    picture: z.string({
+        required_error: "Picture must be a string path",
+    }).optional(),
+    cover_picture: z.string({
+        required_error: "Cover picture must be a string path",
+    }).optional(),
+    tags: z.array(
+        z.object({
+            tag: z.string({
+                required_error: "Define the name tag"
+            }),
+        })
+    ),
 })
 
 export const loginSchema = z.object({

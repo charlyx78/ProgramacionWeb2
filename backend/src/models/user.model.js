@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
+    biography: {
+        type: String,
+        trim: true
+    },
     username: {
         type: String,
         required: true,
@@ -32,9 +36,40 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    user_picture: {
+    picture: {
         type: String,
-        trim: true
+        trim: true,
+        default: ''
+    },
+    cover_picture: {
+        type: String,
+        trim: true,
+        default: ''
+    },
+    followers: {
+        type: Number,
+        default: 0
+    },
+    following: {
+        type: Number,
+        default: 0
+    },
+    tags: [
+        {
+            name: {
+                type: String,
+                ref: 'Tag'
+            },
+            score: {
+                type: Number,
+                default: 0
+            }
+        },
+    ],
+    status_connection: {
+        type: String,
+        enum: ['connected', 'disconnected'],
+        default: 'connected'
     },
     status: {
         type: String,

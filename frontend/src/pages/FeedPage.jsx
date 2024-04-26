@@ -4,25 +4,18 @@ import { ThreadPoster } from '../components/ThreadPoster'
 import toast from 'react-hot-toast'
 import { Post } from '../components/Post'
 import { NavLink } from 'react-router-dom'
+import { getPosts } from '../api/posts'
 
 export const FeedPage = () => {
   const [postsFeed, setPostsFeed] = useState([])
-  const getPosts = async () => {
-    await fetch('http://localhost:3000/posts').then((res) => {
-      if (!res) {
-        throw new Error(res)
-      }
-      return res.json()
-    }).then((posts) => {
-      const newPostsFeed = posts
-      setPostsFeed(newPostsFeed)
-    }).catch((err) => {
-      toast.error(`Unable to get posts due to: ${err.message}`)
-    })
+  
+  const getPostsFeed = async () => {
+    const posts = await getPosts()
+    setPostsFeed(posts.data.posts)
   }
 
   useEffect(() => {
-    getPosts()
+    getPostsFeed()
   }, [])
 
   return (
@@ -33,10 +26,10 @@ export const FeedPage = () => {
           isEnabled={false}
         />
         {postsFeed.map((post) => {
-          if (post.parent) {
+          if (post.parent == null) {
             return (
               <div key={post.id}>
-                <Post postObject={post} />
+                <Post post={post} />
               </div>
             )
           }

@@ -1,30 +1,46 @@
 import User from '../models/user.model.js'
 import bcrypt from 'bcryptjs'
 import { createAcessToken } from '../libs/jwt.js'
+import jwt from 'jsonwebtoken'
+import { TOKEN_SECRET } from '../config.js'
 
 export const register = async (req, res) => {
     const {
         name,
         last_name,
         birth_date,
+        biography,
         username,
         email,
         password,
-        user_picture,
+        picture,
+        cover_picture,
+        tags
     } = req.body
-    try {
-        const passwordHash = await bcrypt.hash(password, 10)
 
+    try {
+        const usernameFound = await User.findOne({username})
+        const emailFound = await User.findOne({email})
+        
+        if(usernameFound || emailFound) return res.status(400).json({
+            message: "Username or email are already in use"
+        })
+        
+        const passwordHash = await bcrypt.hash(password, 10)
+        
         const newUser = new User({
             name,
             last_name,
             birth_date,
+            biography,
             username,
             email,
             password: passwordHash,
-            user_picture
+            picture: req.files && req.files['picture'] ? req.files['picture'][0].path : '',
+            cover_picture: req.files && req.files['cover_picture'] ? req.files['cover_picture'][0].path : '',
+            tags
         })
-
+        
         const userSaved = await newUser.save()
 
         const token = await createAcessToken({ id: userSaved.id })
@@ -35,10 +51,16 @@ export const register = async (req, res) => {
             message: "User created successfully",
             user: {
                 id: userSaved.id,
+                name: userSaved.name,
+                last_name: userSaved.last_name,
                 username: userSaved.username,
                 email: userSaved.email,
+                biography: userSaved.biography,
+                picture: userSaved.picture,
+                cover_picture: userSaved.cover_picture,
                 createdAt: userSaved.createdAt,
                 updatedAt: userSaved.updatedAt,
+                tags: userSaved.tags
             }
          })
     } catch (error) {
@@ -63,12 +85,16 @@ export const login = async (req, res) => {
 
         res.cookie('token', token)
 
-        res.status(201).json({ 
+        res.status(200).json({ 
             message: "User logged successfully",
             user: {
                 id: userFound.id,
+                name: userFound.name,
+                last_name: userFound.last_name,
                 username: userFound.username,
                 email: userFound.email,
+                picture: userFound.picture,
+                cover_picture: userFound.cover_picture,
                 createdAt: userFound.createdAt,
                 updatedAt: userFound.updatedAt,
             }
@@ -84,15 +110,44 @@ export const logout = (req, res) => {
 }
 
 export const profile = async (req, res) => {
-    const userFound = await User.findById(req.user.id)
+    try {
+        const userFound = await User.findById(req.params.id)
+        if(!userFound) return res.status(404).json({ message: "User not found "})
+    
+        res.status(200).json({ 
+            name: userFound.name,
+            last_name: userFound.last_name,
+            username: userFound.username,
+            email: userFound.email,
+            picture: userFound.picture,
+            cover_picture: userFound.cover_picture,
+            createdAt: userFound.createdAt,
+            updatedAt: userFound.updatedAt,
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 
-    if(!userFound) return res.status(400).json({ message: "User not found "})
+export const verifyToken = async(req, res) => {
+    const {token} = req.cookies
+    if(!token) return res.status(401).json({message: "Unauthorized"})
+    jwt.verify(token, TOKEN_SECRET, async (err, user) => {
+        if(err) return res.status(401).json({message: "Unauthorized"})
+        const userFound = await User.findById(user.id)
 
-    res.status(200).json({ 
-        id: userFound.id,
-        username: userFound.username,
-        email: userFound.email,
-        createdAt: userFound.createdAt,
-        updatedAt: userFound.updatedAt,
-    });
+        if(!user) return res.status(401).json({message: "Unauthorized"})
+
+        return res.json({
+            id: userFound.id,
+            name: userFound.name,
+            last_name: userFound.last_name,
+            username: userFound.username,
+            email: userFound.email,
+            picture: userFound.picture,
+            cover_picture: userFound.cover_picture,
+            createdAt: userFound.createdAt,
+            updatedAt: userFound.updatedAt,
+        })
+    })
 }

@@ -1,21 +1,21 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { UserImage } from './UserImage'
 import reactLogo from '../assets/react.svg'
-import { useUser } from '../contexts/UserContext'
+// import { useUser } from '../contexts/UserContext'
 import { useRef } from 'react'
 import React from 'react'
 
 export const NavBarTop = () => {
   const offcanvasRef = useRef(null)
-  const { logoutUser } = useUser()
+  // const { logoutUser } = useUser()
   const navigate = useNavigate()
-  const handleLogOut = () => {
-    if (offcanvasRef.current) {
-      offcanvasElement.current.classList.remove('show')
-    }
-    logoutUser()
-    navigate('/')
-  }
+  // const handleLogOut = () => {
+  //   if (offcanvasRef.current) {
+  //     offcanvasElement.current.classList.remove('show')
+  //   }
+  //   logoutUser()
+  //   navigate('/')
+  // }
 
   return (
     <nav className='navbar navbar-expand-sm bg-body position-sticky border-bottom top-0 z-3 d-lg-none'>

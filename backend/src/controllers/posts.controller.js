@@ -1,7 +1,13 @@
 import Post from "../models/post.model.js"
 
 export const getPosts = async (req, res) => {
+    const posts = await Post.find()
 
+    if(!posts) return res.status(404).json({message: "Posts not found"})
+
+    res.status(200).json({
+        posts: posts
+    })
 }
 
 export const createPost = async (req, res) => {
@@ -10,21 +16,24 @@ export const createPost = async (req, res) => {
         attachment,
         parent,
         tags,
-        user
     } = req.body
+
     try {
         const newPost = new Post({
             content,
-            attachment,
+            attachment: req.body.attachment.name,
             parent,
             tags,
             user: req.user.id
-        })
+        })      
 
-        await newPost.save()
+        const postSaved = await newPost.save()
 
         res.status(201).json({ 
             message: "Post created successfully",
+            post: {
+                id: postSaved._id
+            }
          })
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -35,9 +44,7 @@ export const replyPost = async (req, res) => {
     const {
         content,
         attachment,
-        parent,
-        tags,
-        user
+        tags
     } = req.body
 
     try {
@@ -51,10 +58,13 @@ export const replyPost = async (req, res) => {
             user: req.user.id
         })
 
-        await newReply.save()
+        const replySaved = await newReply.save()
 
         res.status(201).json({ 
             message: "Post replied successfully",
+            reply: {
+                id: replySaved._id
+            },
         })
     } catch (error) {
         res.status(500).json({ message: error.message });

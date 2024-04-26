@@ -1,8 +1,9 @@
 @import '../variables.scss';
 
-.profile-info-cover-container {
+.cover-picture {
     background-color: $body-secondary-bg;
-    height: 200px;
+    height: 200px !important;
+    object-fit: cover;
 }
 
 .profile-info-image {

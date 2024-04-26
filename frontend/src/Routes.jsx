@@ -8,10 +8,10 @@ import { NotFoundPage } from './pages/NotFoundPage'
 import { LoginPage } from './pages/LoginPage'
 import { FeedPage } from './pages/FeedPage'
 import { SignUpPage } from './pages/SignUpPage'
-import { CreatePost } from './pages/CreatePost'
 import { ProfileSettingsPage } from './pages/ProfileSettingsPage'
 import { NotificationsPage } from './pages/NotificationsPage'
 import { SearchPage } from './pages/SearchPage'
+import { CreatePostPage } from './pages/CreatePostPage'
 
 export const Routes = createBrowserRouter([
   {
@@ -32,10 +32,10 @@ export const Routes = createBrowserRouter([
         children: [
           {
             path: 'create-post',
-            element: <CreatePost />
+            element: <CreatePostPage />
           },
           {
-            path: 'profile',
+            path: 'profile/:userId',
             element: <ProfilePage />
           },
           {
