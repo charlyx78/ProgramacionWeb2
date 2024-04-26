@@ -9,14 +9,14 @@ import { usePosts } from '../contexts/PostsContext'
 
 export const CreatePostPage = () => {
 
-  const { createMainPost, createThread, replyToPost, errors: postErrors } = usePosts()
+  const { createMainPost, createThread, errors: postErrors } = usePosts()
 
   /* Array de post */
   const [postArray, setPostArray] = useState([
     {
       temp_id: uuid(),
       content: '',
-      attachment: null
+      attachment: ''
     }
   ])
 
@@ -58,7 +58,7 @@ export const CreatePostPage = () => {
   /* Verifica que el ultimo post sea vacio o no */
   useEffect(() => {
     const postArrayLastIndex = postArray[postArray.length - 1]
-    if (postArrayLastIndex.content === '' && postArrayLastIndex.attachment === null) {
+    if (postArrayLastIndex.content === '' && postArrayLastIndex.attachment === '') {
       setLastPostEmpty(true)
     } else {
       setLastPostEmpty(false)
@@ -69,7 +69,7 @@ export const CreatePostPage = () => {
   useEffect(() => {
     let emptyElementFound = false
     postArray.forEach((thread) => {
-      if (thread.content === '' && thread.attachment === null) {
+      if (thread.content === '' && thread.attachment === '') {
         emptyElementFound = true
       }
     })
@@ -83,7 +83,7 @@ export const CreatePostPage = () => {
         {
           temp_id: uuid(),
           content: '',
-          attachment: null
+          attachment: ''
         }]
       setPostArray(newPostArray)
     }

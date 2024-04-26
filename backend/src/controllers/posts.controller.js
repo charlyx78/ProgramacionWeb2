@@ -17,7 +17,7 @@ export const createPost = async (req, res) => {
         parent,
         tags,
     } = req.body
-
+    console.log(req.body)
     try {
         const newPost = new Post({
             content,

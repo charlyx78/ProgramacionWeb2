@@ -9,7 +9,7 @@ export const ProfilePage = () => {
 
   const navigate = useNavigate()
 
-  const { userId } = useParams()
+  const { username } = useParams()
 
   const { getUserData } = useAuth()
 
@@ -17,12 +17,12 @@ export const ProfilePage = () => {
 
   useEffect(() => {
     async function getUser() {
-      const userData = await getUserData(userId)
+      const userData = await getUserData(username)
       setUser(userData)
+      if(!userData) navigate('/*')
     }
     getUser()
-    // if(!user.entries) navigate('/*')
-  }, [userId])
+  }, [username])
 
   return (
     <>

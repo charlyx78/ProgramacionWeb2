@@ -15,6 +15,7 @@ export const PostProvider = ({ children }) => {
 
   const createMainPost = async (post) => {
     try {
+      console.log(post)
       const res = await createPost(post)
       return res.data
     } catch(error) {
@@ -33,9 +34,11 @@ export const PostProvider = ({ children }) => {
 
   const createThread = async (posts) => {
     try {
+      console.log(posts)
       if(posts.length > 1) {
-
+        
         const mainPost = await createMainPost(posts[0])
+        console.log(mainPost)
         let i = 1
         let parentId = mainPost.post.id
 

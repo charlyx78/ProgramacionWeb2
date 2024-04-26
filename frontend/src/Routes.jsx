@@ -35,7 +35,7 @@ export const Routes = createBrowserRouter([
             element: <CreatePostPage />
           },
           {
-            path: 'profile/:userId',
+            path: 'profile/:username',
             element: <ProfilePage />
           },
           {

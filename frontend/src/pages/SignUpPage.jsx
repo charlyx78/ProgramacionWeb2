@@ -59,6 +59,10 @@ export const SignUpPage = () => {
       next()
     }
     else {
+      /** Parseamos el arreglo de tags */
+      const parsedTags = values.tags.map((tag) => JSON.parse(tag))
+      values.tags = parsedTags
+
       signUp(values)
     }
   })
@@ -73,11 +77,11 @@ export const SignUpPage = () => {
     back,
     next
   } = useMultiStepForm([
-    <TagsForm register={register} errors={errors} {...data} updateFields={updateFields}></TagsForm>,
     <UserForm register={register} errors={errors} {...data} updateFields={updateFields} />,
     <BiographyForm register={register} errors={errors} {...data} updateFields={updateFields} />,
     <UserImageForm register={register} setValue={setValue} errors={errors} {...data} updateFields={updateFields} />,
-    <PasswordForm register={register} errors={errors} {...data} updateFields={updateFields} />
+    <PasswordForm register={register} errors={errors} {...data} updateFields={updateFields} />,
+    <TagsForm register={register} errors={errors} {...data} updateFields={updateFields} />
   ])
 
   return (

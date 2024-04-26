@@ -18,6 +18,8 @@ export const register = async (req, res) => {
         tags
     } = req.body
 
+    console.log(req.body)
+
     try {
         const usernameFound = await User.findOne({username})
         const emailFound = await User.findOne({email})
@@ -58,6 +60,8 @@ export const register = async (req, res) => {
                 biography: userSaved.biography,
                 picture: userSaved.picture,
                 cover_picture: userSaved.cover_picture,
+                followers: userSaved.followers,
+                following: userSaved.following,
                 createdAt: userSaved.createdAt,
                 updatedAt: userSaved.updatedAt,
                 tags: userSaved.tags
@@ -95,6 +99,8 @@ export const login = async (req, res) => {
                 email: userFound.email,
                 picture: userFound.picture,
                 cover_picture: userFound.cover_picture,
+                followers: userFound.followers,
+                following: userFound.following,
                 createdAt: userFound.createdAt,
                 updatedAt: userFound.updatedAt,
             }
@@ -111,7 +117,8 @@ export const logout = (req, res) => {
 
 export const profile = async (req, res) => {
     try {
-        const userFound = await User.findById(req.params.id)
+        console.log(req.params)
+        const userFound = await User.findOne({ username: req.params.id })
         if(!userFound) return res.status(404).json({ message: "User not found "})
     
         res.status(200).json({ 
@@ -121,6 +128,8 @@ export const profile = async (req, res) => {
             email: userFound.email,
             picture: userFound.picture,
             cover_picture: userFound.cover_picture,
+            followers: userFound.followers,
+            following: userFound.following,
             createdAt: userFound.createdAt,
             updatedAt: userFound.updatedAt,
         });

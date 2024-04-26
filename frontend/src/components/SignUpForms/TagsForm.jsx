@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { FormWrapper } from '../FormWrapper'
 import { ErrorAlert } from '../ErrorAlert'
 
-export const TagsForm = ({ register, errors, tags }) => {
+export const TagsForm = ({ register, errors, tags, updateFields }) => {
 
   const tagInput = useRef()
   const tagButton = useRef()
@@ -15,7 +15,7 @@ export const TagsForm = ({ register, errors, tags }) => {
     setTagsArray(newTagArray)
     tagInput.current.value = ''
     tagInput.current.focus()
-    console.log(newTagArray)
+    updateFields({ tags: [...tags, { name: tag }] }) // Aquí se corrigió la llamada a updateFields
   }
 
 
@@ -43,7 +43,26 @@ export const TagsForm = ({ register, errors, tags }) => {
             <div className="card" key={index}>
               <div className="card-body">
                 <div className="form-check">
-                  <input className="form-check-input" type="checkbox" value={tag.name} checked />
+                  <input
+                    {...register('tags', {required: 'At least 5 tags are required'})}
+                    className="form-check-input"
+                    name='tags'
+                    type="checkbox"
+                    value={JSON.stringify({name: tag.name})}
+                    onChange={(e) => {
+                      const tagName = e.target.value
+                      const isChecked = e.target.checked
+
+                      if (isChecked) {
+                        updateFields({ tags: [...tags, { name: tagName }] })
+                      } else {
+                        const updatedTags = tags.filter((t) => t.name !== tagName)
+                        updateFields({ tags: updatedTags })
+                      }
+                    }}
+                    checked={tags.some((t) => t.name === tag.name)} // Marca la checkbox si la etiqueta está presente en tags
+                  />
+
                   <label className="form-check-label" htmlFor="flexCheckDisabled">
                     {tag.name}
                   </label>
@@ -54,6 +73,11 @@ export const TagsForm = ({ register, errors, tags }) => {
 
         </div>
       </div>
+      {errors.name && (
+        <ErrorAlert>
+          {errors.tags.message}
+        </ErrorAlert>
+      )}
     </FormWrapper>
   )
 }

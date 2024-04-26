@@ -1,18 +1,18 @@
 import Tag from "../models/tag.model.js"
 
 export const createTag = async(tag) => {
-    const {
-        name
-    } = tag
+    try {        
+        const {
+            name
+        } = tag
 
-    try {
         const tagFound = await Tag.findOne({ name })
         if(tagFound) return ({
             message: "Tag already exists"
         })
 
         const newTag = new Tag({
-            name,
+            name: name,
         })
 
         const tagSaved = await newTag.save()
