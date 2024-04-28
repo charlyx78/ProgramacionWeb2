@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken'
-import { TOKEN_SECRET } from '../config.js'
 
 export const authRequired = (req, res, next) => {
     const { token } = req.cookies
@@ -8,7 +7,7 @@ export const authRequired = (req, res, next) => {
         message: "No token found, request denied"
     })
 
-    jwt.verify(token, TOKEN_SECRET, (err, user) => {
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
         if(err) return res.status(401).json({
             message: "Invalid token, request denied"
         })
