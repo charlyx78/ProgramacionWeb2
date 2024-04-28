@@ -56,9 +56,11 @@ export const SignUpPage = () => {
 
   const onSubmit = handleSubmit(async (values) => { 
     if (!isLastStep) {
+      console.log(values.tags)
       next()
     }
     else {
+      console.log(values.tags)
       const tags = Array.isArray(values.tags) ? values.tags : [values.tags]
       /** Parseamos el arreglo de tags */
       const parsedTags = tags.map((tag) => {
@@ -90,7 +92,7 @@ export const SignUpPage = () => {
     <BiographyForm register={register} errors={errors} {...data} updateFields={updateFields} />,
     <UserImageForm register={register} setValue={setValue} errors={errors} {...data} updateFields={updateFields} />,
     <PasswordForm register={register} errors={errors} {...data} updateFields={updateFields} />,
-    <TagsForm register={register} errors={errors} {...data} updateFields={updateFields} />
+    <TagsForm register={register} errors={errors} {...data} updateFields={updateFields} />,
   ])
 
   return (

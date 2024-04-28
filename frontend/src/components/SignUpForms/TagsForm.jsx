@@ -1,24 +1,26 @@
 import React, { useRef, useState } from 'react'
 import { FormWrapper } from '../FormWrapper'
 import { ErrorAlert } from '../ErrorAlert'
+import { useForm } from 'react-hook-form'
 
+// Dentro de tu componente funcional
 export const TagsForm = ({ register, errors, tags, updateFields }) => {
 
   const tagInput = useRef()
   const tagButton = useRef()
   
-  const [tagsArray, setTagsArray] = useState([])
-
+  
+  const [tagsArray, setTagsArray] = useState(tags)
+ 
   const addTagToArray = () => {
     const tag = tagInput.current.value
-    const newTagArray = [...tagsArray, {name: tag}]
+    const newTagArray = [...tagsArray, {name: tag,  checked: true}]
     setTagsArray(newTagArray)
     tagInput.current.value = ''
     tagInput.current.focus()
-    updateFields({ tags: [...tags, { name: tag }] }) // Aquí se corrigió la llamada a updateFields
+    updateFields({ tags: newTagArray })
   }
-
-
+  
   return (
     <FormWrapper title='Which are your interests?'>
 
@@ -42,25 +44,14 @@ export const TagsForm = ({ register, errors, tags, updateFields }) => {
           {tagsArray.map((tag, index) => (
             <div className="card" key={index}>
               <div className="card-body">
-                <div className="form-check">
+                <div className="d-flex align-items-center gap-2">
                   <input
                     {...register('tags', {required: 'At least 5 tags are required'})}
-                    className="form-check-input"
+                    className="form-check-input d-none"
                     name='tags'
                     type="checkbox"
-                    value={JSON.stringify({name: tag.name})}
-                    onChange={(e) => {
-                      const tagName = e.target.value
-                      const isChecked = e.target.checked
-
-                      if (isChecked) {
-                        updateFields({ tags: [...tags, { name: tagName }] })
-                      } else {
-                        const updatedTags = tags.filter((t) => t.name !== tagName)
-                        updateFields({ tags: updatedTags })
-                      }
-                    }}
-                    checked={tags.some((t) => t.name === tag.name)} // Marca la checkbox si la etiqueta está presente en tags
+                    value = { JSON.stringify({name: tag.name}) } 
+                    checked = {tag.checked}
                   />
 
                   <label className="form-check-label" htmlFor="flexCheckDisabled">
