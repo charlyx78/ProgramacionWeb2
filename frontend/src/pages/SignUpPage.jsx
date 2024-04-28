@@ -59,8 +59,17 @@ export const SignUpPage = () => {
       next()
     }
     else {
+      const tags = Array.isArray(values.tags) ? values.tags : [values.tags]
       /** Parseamos el arreglo de tags */
-      const parsedTags = values.tags.map((tag) => JSON.parse(tag))
+      const parsedTags = tags.map((tag) => {
+        try {
+          return JSON.parse(tag)
+        } catch (error) {
+          console.error('Error al analizar el tag como JSON:', error)
+          return tag
+        }
+      })
+
       values.tags = parsedTags
 
       signUp(values)
