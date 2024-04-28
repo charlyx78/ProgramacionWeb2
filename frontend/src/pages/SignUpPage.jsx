@@ -56,24 +56,10 @@ export const SignUpPage = () => {
 
   const onSubmit = handleSubmit(async (values) => { 
     if (!isLastStep) {
-      console.log(values.tags)
       next()
     }
     else {
-      console.log(values.tags)
-      const tags = Array.isArray(values.tags) ? values.tags : [values.tags]
-      /** Parseamos el arreglo de tags */
-      const parsedTags = tags.map((tag) => {
-        try {
-          return JSON.parse(tag)
-        } catch (error) {
-          console.error('Error al analizar el tag como JSON:', error)
-          return tag
-        }
-      })
-
-      values.tags = parsedTags
-
+      values.tags = data.tags
       signUp(values)
     }
   })
