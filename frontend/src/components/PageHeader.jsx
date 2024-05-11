@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export const PeageHeader = ({ children }) => {
+export const PageHeader = ({ children }) => {
   const navigate = useNavigate()
 
   return (

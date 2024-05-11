@@ -12,6 +12,7 @@ import { ProfileSettingsPage } from './pages/ProfileSettingsPage'
 import { NotificationsPage } from './pages/NotificationsPage'
 import { SearchPage } from './pages/SearchPage'
 import { CreatePostPage } from './pages/CreatePostPage'
+import { PostPage } from './pages/PostPage'
 
 export const Routes = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ export const Routes = createBrowserRouter([
             element: <CreatePostPage />
           },
           {
-            path: 'profile/:username',
+            path: 'profile/:userId',
             element: <ProfilePage />
           },
           {
@@ -45,6 +46,10 @@ export const Routes = createBrowserRouter([
           {
             path: 'feed',
             element: <FeedPage />
+          },
+          {
+            path: 'post/:postId',
+            element: <PostPage />
           },
           {
             path: 'search',

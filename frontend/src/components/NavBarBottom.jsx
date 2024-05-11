@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MenuBarItem } from './MenuBarItem'
+import { useAuth } from '../contexts/AuthContext'
 
 export const NavBarBottom = () => {
+
+  const { user: userLogged } = useAuth()
+
   return (
     <nav className='navbar fixed-bottom navbar-expand-sm bg-body d-lg-none border-top'>
       <div className='container'>
@@ -9,7 +13,7 @@ export const NavBarBottom = () => {
           <MenuBarItem url='/feed' icon='house'></MenuBarItem>
           <MenuBarItem url='/search' icon='search'></MenuBarItem>
           <MenuBarItem url='/create-post' icon='plus-circle'></MenuBarItem>
-          <MenuBarItem url='/profile' icon='person'></MenuBarItem>
+          <MenuBarItem url={`/profile/${userLogged._id}`} icon='person'></MenuBarItem>
           <MenuBarItem url='/notifications' icon='bell'></MenuBarItem>
 
         </ul>

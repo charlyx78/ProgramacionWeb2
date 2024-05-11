@@ -1,5 +1,5 @@
-import { React, createContext, useState, useContext, useEffect } from 'react'
-import { createPost, replyPost } from '../api/posts'
+import { React, createContext, useState, useContext } from 'react'
+import { createPostRequest, replyPostRequest, likeRequest, getPostResquest, getRepliesRequest, getProfilePostsResquest, getTagsPostsRequest, getFollowedPostsRequest, findLikeRequest } from '../api/posts'
 
 export const PostContext = createContext()
 
@@ -13,10 +13,63 @@ export const PostProvider = ({ children }) => {
   
   const [errors, setErrors] = useState([])
 
+  const getTagsPosts = async() => {
+    try {
+      const res = await getTagsPostsRequest()
+      return res.data.posts
+    } catch (error) {
+      setErrors([error.response.data])
+    }
+  }
+  
+  const getFollowedPosts = async() => {
+    try {
+      const res = await getFollowedPostsRequest()
+      return res.data.posts
+    } catch (error) {
+      setErrors([error.response.data])
+    }
+  }
+
+  const getPost = async(postId) => {
+    try {
+      const res = await getPostResquest(postId)
+      return res.data
+    } catch (error) {
+      setErrors([error.response.data])
+    }
+  }
+  
+  const getProfilePosts = async(userId) => {
+    try {
+      const res = await getProfilePostsResquest(userId)
+      return res.data.posts
+    } catch (error) {
+      setErrors([error.response.data])
+    }
+  }
+
   const createMainPost = async (post) => {
     try {
-      console.log(post)
-      const res = await createPost(post)
+      const res = await createPostRequest(post)
+      return res.data
+    } catch(error) {
+      setErrors([error.response.data])
+    }
+  }
+
+  const findLike = async(postId) => {
+    try {
+      const res = await findLikeRequest(postId)
+      return res.data
+    } catch (error) {
+      return setErrors([error.response.data])
+    }
+  }
+
+  const like = async (postId) => {
+    try {
+      const res = await likeRequest(postId)
       return res.data
     } catch(error) {
       setErrors([error.response.data])
@@ -25,45 +78,25 @@ export const PostProvider = ({ children }) => {
 
   const replyToPost = async (post) => {
     try {
-      const res = await replyPost(post)
+      console.log(post)
+      const res = await replyPostRequest(post)
       return res.data
     } catch(error) {
       setErrors([error.response.data])
     }
   }
-
-  const createThread = async (posts) => {
+  
+  const getReplies = async(parentId) => {
     try {
-      console.log(posts)
-      if(posts.length > 1) {
-        
-        const mainPost = await createMainPost(posts[0])
-        console.log(mainPost)
-        let i = 1
-        let parentId = mainPost.post.id
-
-        while(i < posts.length) {
-          const repliedPost = await replyPost({
-            id: parentId,
-            content: posts[i].content,
-            attachment: posts[i].attachment
-          })
-          parentId = repliedPost.data.reply.id
-          i++
-        }
-        return mainPost
-      }
-      else {
-        return 'Unable to create thread, more than 1 post is required'
-      }
+      const res = await getRepliesRequest(parentId) 
+      return res.data.posts
     } catch (error) {
-      console.log(error)
       setErrors([error.response.data])
     }
   }
 
   return (
-    <PostContext.Provider value={{ createMainPost, createThread, replyToPost, errors }}>
+    <PostContext.Provider value={{ getTagsPosts, getFollowedPosts, createMainPost, getProfilePosts, findLike, like, replyToPost, getReplies, getPost, errors }}>
       {children}
     </PostContext.Provider>
   )

@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 import authRoutes from "./routes/auth.routes.js"
 import postsRoutes from "./routes/posts.routes.js"
 import tagsRoutes from './routes/tags.routes.js'
+import searchRoutes from './routes/search.routes.js'
 
 dotenv.config();
 
@@ -28,5 +29,6 @@ app.use('/uploads/', express.static('uploads'))
 app.use('/api', authRoutes)
 app.use('/api', postsRoutes)
 app.use('/api', tagsRoutes)
+app.use('/api', searchRoutes)
 
 export default app;
