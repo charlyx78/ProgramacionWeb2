@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.routes.js"
 import postsRoutes from "./routes/posts.routes.js"
 import tagsRoutes from './routes/tags.routes.js'
 import searchRoutes from './routes/search.routes.js'
+import chatRoutes from './routes/chat.routes.js'
 
 dotenv.config();
 
@@ -30,5 +31,6 @@ app.use('/api', authRoutes)
 app.use('/api', postsRoutes)
 app.use('/api', tagsRoutes)
 app.use('/api', searchRoutes)
+app.use('/api', chatRoutes)
 
 export default app;

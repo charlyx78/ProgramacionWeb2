@@ -19,7 +19,23 @@ server.listen(3000, () => {
 
 io.on('connection', (socket) => {
     console.log('Connected to Socket.IO');
+    
+    socket.on('joinRoom', ({ userId1, userId2 }) => {
+        const roomId = [userId1, userId2].sort().join('-');
+        console.log(`Joined room: ${roomId}`);
+        socket.join(roomId);
+    });
+
+    socket.on('leaveRoom', (roomId) => {
+        socket.leave(roomId);
+        console.log(`Leaving room: ${roomId}`);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Client disconnected');
+    });
 });
+
 
 io.on('error', (error) => {
     console.error('Error en la conexión de Socket.IO:', error);

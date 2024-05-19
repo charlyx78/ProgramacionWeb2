@@ -15,9 +15,8 @@ export const getTagsPosts = async(req, res) => {
         const posts = await Post.find({
             tags: { $elemMatch: { name: { $in: userTags.tags.map(tag => tag.name) } } },
             parent: null,
-            createdAt: { $gte: twoDaysAgo }
         })
-        .sort({ likes: -1, createdAt: -1 })
+        .sort({ createdAt: -1 })
         .populate('user')
     
         if (!posts) return res.status(404).json({ message: "Posts not found" })
@@ -40,15 +39,16 @@ export const getFollowPosts = async(req, res) => {
         const posts = await Post.find({
             user: { $in: followedUserIds },
             parent: null,
-            createdAt: { $gte: twoDaysAgo }
         })
-        .sort({ likes: -1, createdAt: -1 })
+        .sort({ createdAt: -1 })
         .populate('user')
     
         if (!posts) return res.status(404).json({ message: "Posts not found" })
     
         res.status(200).json({
-            posts: posts
+            posts: posts,
+            usersFollowed,
+            followedUserIds
         })
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -221,9 +221,9 @@ export const hasLike = async(req, res) => {
         })
 
         if (findLike.length == 0) {
-            res.status(200).json({message: "You don't have a like in this post"})
+            res.status(200).json({message: false})
         } else {
-            res.status(400).json({message: "You liked this post"})
+            res.status(200).json({message: true})
         }
     } catch (error) {
         res.status(500).json({ message: error.message });

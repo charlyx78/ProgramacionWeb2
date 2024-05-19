@@ -10,16 +10,22 @@ export const SearchPage = () => {
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm()
 
+  const [showPage, setShowPage] = useState(false)
+
   const [searchResultsUser, setSearchResultsUser] = useState([])
   const [searchResultsPost, setSearchResultsPost] = useState([])
 
   const [noUsers, setNoUsers] = useState(false)
   const [noPosts, setNoPosts] = useState(false)
 
+  const [loading, setLoading] = useState(false)
+
   const { searchUser, searchPosts } = useSearch()
 
   const onSubmit = handleSubmit(async (values) => {   
     if(values.searchInput != '') {
+      setLoading(true)
+      
       const users = await searchUser(values)
       users.length == 0 ? setNoUsers(true) : setNoUsers(false)
       setSearchResultsUser(users)
@@ -27,6 +33,9 @@ export const SearchPage = () => {
       const posts = await searchPosts(values)
       posts.length == 0 ? setNoPosts(true) : setNoPosts(false)
       setSearchResultsPost(posts)
+
+      setLoading(false)
+      setShowPage(true)
     } else {
       toast.error('Search cannot be empty')
     }
@@ -47,40 +56,46 @@ export const SearchPage = () => {
         </form>
       </PageHeader>
 
-      <section className="search-content container-fluid position-relative padding-top-content py-3">
-        <div className='card border-0 bg-body-tertiary mb-3'>
-          <div className='card-body'>
-            <h5 className='mb-0 text-center'>Users</h5>
+      {loading && (
+        <h5 className='text-center py-2'>Loading...</h5>
+      )}
+
+      {showPage && (
+        <section className="search-content container-fluid position-relative padding-top-content py-3">
+          <div className='card border-0 bg-body-tertiary mb-3'>
+            <div className='card-body'>
+              <h5 className='mb-0 text-center'>Users</h5>
+            </div>
           </div>
-        </div>
-        {noUsers && (
-          <p className='text-center mb-0'>No results available</p>    
-        )}
-        <div className="d-flex flex-column gap-3">
-          {searchResultsUser.map((user) => {
-            return (
-              <ProfileCard key={user._id} user={user}>
-              </ProfileCard>
-            )
-          })}
-        </div>
-        <hr />
-        <div className='card border-0 bg-body-tertiary mb-3'>
-          <div className='card-body'>
-            <h5 className='mb-0 text-center'>Posts</h5>
+          {noUsers && (
+            <p className='text-center mb-0'>No results available</p>    
+          )}
+          <div className="d-flex flex-column gap-3">
+            {searchResultsUser.map((user) => {
+              return (
+                <ProfileCard key={user._id} user={user}>
+                </ProfileCard>
+              )
+            })}
           </div>
-        </div>    
-        {noPosts && (
-          <p className='text-center mb-0'>No results available</p>    
-        )}
-        <div className="d-flex flex-column gap-3">
-          {searchResultsPost.map((post) => {
-            return (
-              <Post post={post} key={post._id}></Post>
-            )
-          })}
-        </div>
-      </section>
+          <hr />
+          <div className='card border-0 bg-body-tertiary mb-3'>
+            <div className='card-body'>
+              <h5 className='mb-0 text-center'>Posts</h5>
+            </div>
+          </div>    
+          {noPosts && (
+            <p className='text-center mb-0'>No results available</p>    
+          )}
+          <div className="d-flex flex-column gap-3">
+            {searchResultsPost.map((post) => {
+              return (
+                <Post post={post} key={post._id}></Post>
+              )
+            })}
+          </div>
+        </section>
+      )}
     </main>
   )
 }

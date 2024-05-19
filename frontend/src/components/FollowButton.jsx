@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import socketIOClient from 'socket.io-client'
 import { ENDPOINT } from '../constants/endpoint'
 
-export const FollowButton = ({ user: userView, setFollowers = null }) => {
+export const FollowButton = ({ user, setFollowers = null }) => {
 
   const { findFollow, follow, unfollow, user: userLogged } = useAuth()
 
@@ -13,18 +13,19 @@ export const FollowButton = ({ user: userView, setFollowers = null }) => {
 
   useEffect(() => {
     async function findFollowUser() {
-      const hasFollowUser = await findFollow(userView.id)
-      hasFollowUser ? setHasFollow(true) : setHasFollow(false)
+      if(user && user.id) {
+        const hasFollowUser = await findFollow(user.id)
+        hasFollowUser.message ? setHasFollow(true) : setHasFollow(false)
+      }
     }
   
     findFollowUser()
-  
+
     try {
       const socket = socketIOClient(ENDPOINT)
       
-      socket.on(`has-follow-${userView.id}`, userFollowers => {
+      socket.on(`has-follow-${user.id}`, userFollowers => {
         setFollowers ? setFollowers(userFollowers) : ''
-        findFollowUser()
       }) 
       
       return () => {
@@ -33,35 +34,45 @@ export const FollowButton = ({ user: userView, setFollowers = null }) => {
     } catch (error) {
       console.log(error)
     }
-  }, [userView])
+  }, [user])
 
   const followUser = async() => {
-    await follow(userView.id)
+    await follow(user.id)
     toast.success('Following user')
     setHasFollow(true)
   }
   const unfollowUser = async() => {
-    await unfollow(userView.id)
+    await unfollow(user.id)
     toast.success('User unfollowed')
     setHasFollow(false)
   }
 
+  if (!user) {
+    return <div>Loading...</div> // Mostrar un mensaje de carga si user no está definido
+  }
+
+
   return (
     <>
       {
-        userView.id === userLogged._id ? (
+        user.id === userLogged._id ? (
           <NavLink to={'/profile-settings'} className='btn btn-outline-light btn-sm'>
                   Edit profile
           </NavLink>
         ) : (
-          hasFollow == true ? (
+          !hasFollow == true ? (
             <button className='btn btn-outline-light btn-sm' onClick={followUser}>
                     Follow
             </button>
           ) : (
-            <button className='btn btn-outline-primary' onClick={unfollowUser}>
+            <div className='d-flex gap-3'>
+              <NavLink className='btn btn-outline-primary' to={`/chat/${user.id}`}>
+                Message
+              </NavLink>
+              <button className='btn btn-outline-primary' onClick={unfollowUser}>
                     Following <i className='bi bi-check text-success'></i>
-            </button>
+              </button>
+            </div>
           )
         )
       }

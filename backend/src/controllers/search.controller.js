@@ -31,7 +31,8 @@ export const searchPost = async(req, res) => {
     try {
         const searchResult = await Post.find({
             content: { $regex: searchInput, $options: 'i' },
-            status: 'active'
+            status: 'active',
+            parent: null,
         }).populate('user').limit(10).sort({ likes: -1 })
 
         if (!searchResult) return res.status(404).json({message: "Posts not found for this search"})

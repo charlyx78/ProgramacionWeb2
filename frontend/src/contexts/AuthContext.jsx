@@ -20,6 +20,8 @@ export const AuthProvider = ({ children }) => {
 
   const [loading, setLoading] = useState(true)
 
+  const [userView, setUserView] = useState(null)
+
   const signUp = async(user) => {
     try {
       const res = await registerRequest(user)
@@ -59,6 +61,7 @@ export const AuthProvider = ({ children }) => {
   const getUserData = async(userId) => {
     try {
       const userFound = await getUser(userId) 
+      setUserView(userFound.data)
       return userFound.data
     } catch (error) {
       return setErrors([error.response.data])
@@ -132,7 +135,7 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ signUp, signOut, user, updateProfile, findFollow, follow, unfollow, isAuthenticated, errors, signIn, getUserData, loading }}>
+    <AuthContext.Provider value={{ signUp, userView, signOut, user, updateProfile, findFollow, follow, unfollow, isAuthenticated, errors, signIn, getUserData, loading }}>
       {children}
     </AuthContext.Provider>
   )

@@ -5,15 +5,13 @@ import { NavLink } from 'react-router-dom'
 
 export const ProfileCard = ({user}) => {
 
-  console.log(user)
-  
   const { signOut, user: userLogged } = useAuth()
 
   const [showDropdown, setShowDropdown] = useState(false)
 
   return (
     <div className='position-relative'>
-      <NavLink className='card bg-transparent text-decoration-none' data-aos='zoom-in-up' to={`/profile/${user._id}`} onClick={() => setShowDropdown(!showDropdown)}>
+      <NavLink className='card bg-transparent text-decoration-none' to={`/profile/${user._id}`} onClick={() => setShowDropdown(!showDropdown)}>
         <div className="card-body d-flex align-items-center py-2 gap-3 px-3">
           <UserImage sourceImage={`http://localhost:3000/${user.picture}`} width='40px' height='40px' />
           <div className='d-flex flex-column align-items-start'>

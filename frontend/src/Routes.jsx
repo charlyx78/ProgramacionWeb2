@@ -13,6 +13,7 @@ import { NotificationsPage } from './pages/NotificationsPage'
 import { SearchPage } from './pages/SearchPage'
 import { CreatePostPage } from './pages/CreatePostPage'
 import { PostPage } from './pages/PostPage'
+import { ChatPage } from './pages/ChatPage'
 
 export const Routes = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const Routes = createBrowserRouter([
           {
             path: 'profile/:userId',
             element: <ProfilePage />
+          },
+          {
+            path: 'chat/:userId',
+            element: <ChatPage />
           },
           {
             path: 'profile-settings',

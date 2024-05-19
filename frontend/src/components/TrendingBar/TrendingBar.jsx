@@ -12,7 +12,7 @@ export const TrendingBar = () => {
             to='/search'>
               Search...
           </NavLink>
-          <TrendsCard></TrendsCard>
+          {/* <TrendsCard></TrendsCard> */}
         </div>
       </div>
     </>

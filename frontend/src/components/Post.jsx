@@ -25,7 +25,7 @@ export const Post = ({ post: postView, isReply = false }) => {
   useEffect(() => {
     async function getHasLike() {
       const hasLikeSearch = await findLike(post._id) 
-      hasLikeSearch ? setHasLike(true) : setHasLike(false)
+      hasLikeSearch.message ? setHasLike(true) : setHasLike(false)
     }
 
     getHasLike()
@@ -86,7 +86,7 @@ export const Post = ({ post: postView, isReply = false }) => {
       </div>
       <div className="card-footer bg-body-tertiary border-0">
         <div className="d-flex gap-4 post-buttons-container">
-          <button className='post-button' title='Like'><i className={`bi ${!hasLike ? 'bi-heart-fill text-danger' : 'bi-heart'}`} onClick={handleLike}></i> {post.likes}</button>
+          <button className='post-button' title='Like'><i className={`bi ${hasLike ? 'bi-heart-fill text-danger' : 'bi-heart'}`} onClick={handleLike}></i> {post.likes}</button>
           {!isReply && (
             <NavLink to={`/post/${post._id}`} className='post-button text-decoration-none' title='Comments'>
               <i className='bi bi-chat'></i> {post.comments}

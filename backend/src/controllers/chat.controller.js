@@ -1,0 +1,58 @@
+import Message from "../models/message.model.js";
+import { io } from "../index.js"
+
+export const sendMessage = async (req, res) => {
+    const {
+        content
+    } = req.body
+
+    try {
+        const newMessage = new Message({
+            content,
+            sender: req.user.id,
+            receiver: req.params.id
+        })
+
+        const messageSaved = await newMessage.save()
+
+        const messages = await Message.find({
+            $or: [
+                { sender: req.user.id, receiver: req.params.id },
+                { sender: req.params.id, receiver: req.user.id }
+            ]
+        }).populate('sender receiver')
+        .sort({ createdAt: 1 })
+
+        const roomId = [req.user.id, req.params.id].sort().join('-');
+        io.to(roomId).emit('updateMessages', messages);
+
+        res.status(201).json({
+            message: "Message sended successfully",
+            messageSaved
+        })
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const getMessages = async (req, res) => {
+    try {
+        const messages = await Message.find({
+            $or: [
+                { sender: req.user.id, receiver: req.params.id },
+                { sender: req.params.id, receiver: req.user.id }
+            ]
+        }).populate('sender receiver')
+        .sort({ createdAt: 1 })
+
+        if (messages.length == 0) return res.status(404).json({ message: "Messages not found" })
+
+        res.status(200).json({
+            messages
+        })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
