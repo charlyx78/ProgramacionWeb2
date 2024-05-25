@@ -54,7 +54,7 @@ export const Post = ({ post: postView, isReply = false }) => {
   return (
     <div className="card bg-body-tertiary post-container border-0 rounded" data-aos='zoom-in-up'>
       <div className="card-header d-flex align-items-center gap-3 bg-body-tertiary border-0">
-        <UserImage sourceImage={`http://localhost:3000/${post.user.picture}`} width='36px' height='36px' />
+        <UserImage sourceImage={`${ENDPOINT}}/${post.user.picture}`} width='36px' height='36px' />
         <div className="d-flex flex-column">
           <a href={`/profile/${post.user._id}`} className='m-0 fw-bold text-break text-decoration-none text-body' title='Carlos Adrian Ruiz Hernandez'>{post.user.name} {post.user.lastname}</a>
           <p className='m-0 text-muted fw-light text-nowrap post-username'>@{post.user.username}</p>
@@ -76,10 +76,10 @@ export const Post = ({ post: postView, isReply = false }) => {
 
         <div className='threadPoster-filePreview-container mt-3'>
           {IMAGE_FILES_PERMITTED.includes(post.attachmentType) && (
-            <img src={`http://localhost:3000/${post.attachment}`} alt='File post' className='threadPoster-filePreview rounded border' />
+            <img src={`${ENDPOINT}/${post.attachment}`} alt='File post' className='threadPoster-filePreview rounded border' />
           )}
           {VIDEO_FILES_PERMITTED.includes(post.attachmentType) && (
-            <video src={`http://localhost:3000/${post.attachment}`} alt='File post' controls autoPlay loop className='threadPoster-filePreview rounded border' />
+            <video src={`${ENDPOINT}/${post.attachment}`} alt='File post' controls autoPlay loop className='threadPoster-filePreview rounded border' />
           )}
         </div>
 

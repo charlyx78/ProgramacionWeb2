@@ -1,7 +1,8 @@
 import axios from 'axios'
+import {ENDPOINT} from '../constants/endpoint.js'
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: ENDPOINT + '/api',
   withCredentials: true
 })
 

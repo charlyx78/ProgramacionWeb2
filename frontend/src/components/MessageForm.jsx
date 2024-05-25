@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SetTextareaAutoHeight } from '../logic/SetTextareaAutoHeight.JS'
+import { SetTextareaAutoHeight } from '../logic/SetTextareaAutoHeight.js'
 import { useChat } from '../contexts/ChatContext'
 import { set, useForm } from 'react-hook-form'
 import { ErrorAlert } from './ErrorAlert'
