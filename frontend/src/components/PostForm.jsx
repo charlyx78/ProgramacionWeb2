@@ -9,6 +9,7 @@ import { UserImage } from './UserImage'
 import { REGEX_HASHTAG } from '../constants/regexHashtag.js'
 import { useNavigate } from 'react-router-dom'
 import { IMAGE_FILES_PERMITTED, VIDEO_FILES_PERMITTED } from '../constants/mimeTypes'
+import { ENDPOINT } from '../constants/endpoint.js'
 
 export const PostForm = ({ isReplying = false, idPostRelying = null }) => {
   
@@ -103,7 +104,7 @@ export const PostForm = ({ isReplying = false, idPostRelying = null }) => {
           <div className="d-flex gap-3">
 
             <aside>
-              <UserImage sourceImage={`http://localhost:3000/${userLogged.picture}`}></UserImage>
+              <UserImage sourceImage={`http://${ENDPOINT}/${userLogged.picture}`}></UserImage>
             </aside>
 
             <input type="text" {...register('id')} value={idPostRelying} hidden />

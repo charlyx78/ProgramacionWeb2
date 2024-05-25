@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import { ErrorAlert } from '../components/ErrorAlert'
 import { formatISODate } from '../logic/formatISODate'
 import toast from 'react-hot-toast'
+import { ENDPOINT } from '../constants/endpoint'
 
 export const ProfileSettingsPage = () => {
 
@@ -46,8 +47,8 @@ export const ProfileSettingsPage = () => {
       setBiography(userData.biography)
       setBirthDate(formatISODate(userData.birth_date))
       setTagsArray(userData.tags)
-      setPicture(`http://localhost:3000/${userData.picture}`)
-      setCoverPicture(`http://localhost:3000/${userData.cover_picture}`)
+      setPicture(`http://${ENDPOINT}/${userData.picture}`)
+      setCoverPicture(`http://${ENDPOINT}/${userData.cover_picture}`)
 
       setLoading(false)
     }

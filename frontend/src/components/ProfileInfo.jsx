@@ -4,6 +4,7 @@ import gray from '../assets/gray.png'
 import avatar from '../assets/avatar.svg'
 import { FollowButton } from './FollowButton'
 import { useAuth } from '../contexts/AuthContext'
+import { ENDPOINT } from '../constants/endpoint'
 
 export const ProfileInfo = ({user}) => {  
 
@@ -17,10 +18,10 @@ export const ProfileInfo = ({user}) => {
     <>
       <div className='profile-info-container'>
 
-        <img src={user.cover_picture != '' ? `http://localhost:3000/${user.cover_picture}` : gray} className='w-100 cover-picture' alt='Profile Picture' />
+        <img src={user.cover_picture != '' ? `http://${ENDPOINT}/${user.cover_picture}` : gray} className='w-100 cover-picture' alt='Profile Picture' />
         <div className='profile-into-content w-100'>
           <div className='d-flex justify-content-between align-items-end mb-3'>
-            <img src={user.picture != '' ? `http://localhost:3000/${user.picture}` : avatar} className='profile-info-image rounded-circle' alt='Profile Picture' />
+            <img src={user.picture != '' ? `http://${ENDPOINT}/${user.picture}` : avatar} className='profile-info-image rounded-circle' alt='Profile Picture' />
             <FollowButton user={user} setFollowers={setFollowers}></FollowButton>           
           </div>
           <h4 className='mb-0 fw-bold'>{user.name} {user.last_name}</h4>

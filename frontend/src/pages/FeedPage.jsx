@@ -6,9 +6,6 @@ import { usePosts } from '../contexts/PostsContext'
 
 export const FeedPage = () => {
 
-  // const ENDPOINT = 'http://localhost:3000'
-  // const socket = io(ENDPOINT)
-
   const { getTagsPosts, getFollowedPosts } = usePosts()
 
   const [loading, setLoading] = useState(true)
