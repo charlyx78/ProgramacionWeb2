@@ -1,1 +1,1 @@
-export const ENDPOINT = 'https://www.pw2-diceapp.com'
+export const ENDPOINT = 'https://www.pw2-server-diceapp.xyz'
