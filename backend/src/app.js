@@ -15,11 +15,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-<<<<<<< Updated upstream
-    origin: 'http://localhost:5173',
-=======
     origin: 'https://pw2-9jhoducqq-charlyx78s-projects.vercel.app',
->>>>>>> Stashed changes
     credentials: true
 }))
 
