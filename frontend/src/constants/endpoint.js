@@ -1,1 +1,1 @@
-export const ENDPOINT = process.env.ENDPOINT
+export const ENDPOINT = '100.20.92.101'
