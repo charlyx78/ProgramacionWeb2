@@ -1,1 +1,1 @@
-export const ENDPOINT = '100.20.92.101'
+export const ENDPOINT = 'https://api-pw2.onrender.com'
