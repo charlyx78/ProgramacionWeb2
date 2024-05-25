@@ -10,7 +10,7 @@ connectDB();
 const server = createServer(app);
 export const io = new Server(server, {
     cors: {
-        origin: 'https://pw2-9jhoducqq-charlyx78s-projects.vercel.app'
+        origin: 'http://localhost:5173'
     },
     pingTimeout: 60000
 });
