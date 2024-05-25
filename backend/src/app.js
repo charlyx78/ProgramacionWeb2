@@ -15,7 +15,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: '*',
+    origin: ['https://www.programacion-web2-62lktpz22-charlyx78s-projects.vercel.app/', 'https://www.pw2-diceapp.com'],
     credentials: true
 }))
 

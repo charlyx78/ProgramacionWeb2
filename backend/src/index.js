@@ -10,7 +10,8 @@ connectDB();
 const server = createServer(app);
 export const io = new Server(server, {
     cors: {
-        origin: '*'
+        origin: ['https://www.programacion-web2-62lktpz22-charlyx78s-projects.vercel.app/', 'https://www.pw2-diceapp.com'],
+        credentials: true
     },
     pingTimeout: 60000
 });
