@@ -6,7 +6,7 @@ import { ErrorAlert } from './ErrorAlert'
 import { SetTextareaAutoHeight } from '../logic/SetTextareaAutoHeight.js'
 import { useAuth } from '../contexts/AuthContext'
 import { UserImage } from './UserImage'
-import { REGEX_HASHTAG } from '../constants/regexHashtag.JS'
+import { REGEX_HASHTAG } from '../constants/regexHashtag.js'
 import { useNavigate } from 'react-router-dom'
 import { IMAGE_FILES_PERMITTED, VIDEO_FILES_PERMITTED } from '../constants/mimeTypes'
 
