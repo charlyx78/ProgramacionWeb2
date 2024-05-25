@@ -1,7 +1,9 @@
-import app from "./app.js";
-import { connectDB } from "./db.js";
-import { createServer } from 'http';
+import app from "./app.js"
+import { connectDB } from "./db.js"
+import { createServer } from 'http'
 import { Server } from 'socket.io'
+
+const PORT = process.env.PORT || 3000;
 
 connectDB();
 
@@ -13,7 +15,7 @@ export const io = new Server(server, {
     pingTimeout: 60000
 });
 
-server.listen(3000, () => {
+server.listen(PORT, () => {
     console.log('App listening on port 3000');
 });
 
