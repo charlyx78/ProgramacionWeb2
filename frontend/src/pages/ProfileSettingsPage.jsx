@@ -47,8 +47,8 @@ export const ProfileSettingsPage = () => {
       setBiography(userData.biography)
       setBirthDate(formatISODate(userData.birth_date))
       setTagsArray(userData.tags)
-      setPicture(`http://${ENDPOINT}/${userData.picture}`)
-      setCoverPicture(`http://${ENDPOINT}/${userData.cover_picture}`)
+      setPicture(`${ENDPOINT}/${userData.picture}`)
+      setCoverPicture(`${ENDPOINT}/${userData.cover_picture}`)
 
       setLoading(false)
     }

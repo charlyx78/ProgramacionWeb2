@@ -14,7 +14,7 @@ export const ProfileCard = ({user}) => {
     <div className='position-relative'>
       <NavLink className='card bg-transparent text-decoration-none' to={`/profile/${user._id}`} onClick={() => setShowDropdown(!showDropdown)}>
         <div className="card-body d-flex align-items-center py-2 gap-3 px-3">
-          <UserImage sourceImage={`http://${ENDPOINT}/${user.picture}`} width='40px' height='40px' />
+          <UserImage sourceImage={`${ENDPOINT}/${user.picture}`} width='40px' height='40px' />
           <div className='d-flex flex-column align-items-start'>
             <p className='mb-0 fw-semibold'>{user.name} {user.last_name}</p>
             <p className='mb-0 text-lighter text-muted'>@{user.username}</p>       

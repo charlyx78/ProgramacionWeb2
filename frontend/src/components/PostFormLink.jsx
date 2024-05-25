@@ -11,7 +11,7 @@ export const PostFormLink = () => {
   return (
     <div className="card border-0 bg-body-tertiary">
       <div className="card-body d-flex gap-3 align-items-center">
-        <UserImage sourceImage={`http://${ENDPOINT}/${userLogged.picture}`}></UserImage>
+        <UserImage sourceImage={`${ENDPOINT}/${userLogged.picture}`}></UserImage>
         <NavLink to='/create-post' className='btn bg-body-secondary w-100 text-start py-2 rounded-pill'>What is happening, {userLogged.name}?</NavLink>
       </div>
     </div>

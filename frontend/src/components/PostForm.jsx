@@ -104,7 +104,7 @@ export const PostForm = ({ isReplying = false, idPostRelying = null }) => {
           <div className="d-flex gap-3">
 
             <aside>
-              <UserImage sourceImage={`http://${ENDPOINT}/${userLogged.picture}`}></UserImage>
+              <UserImage sourceImage={`${ENDPOINT}/${userLogged.picture}`}></UserImage>
             </aside>
 
             <input type="text" {...register('id')} value={idPostRelying} hidden />
