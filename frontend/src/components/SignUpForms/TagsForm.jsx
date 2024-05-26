@@ -41,7 +41,7 @@ export const TagsForm = ({ register, errors, tags, updateFields }) => {
 
 
       <div className="card">
-        <div className="card-body d-flex gap-2">
+        <div className="card-body d-flex gap-2" style={{flexWrap: 'wrap !important'}}>
 
           {tagsArray.length === 0 && (
             <p className='mb-0 text-muted fst-italic'>Type key words and click add to know your interests. For example: art, music, videogames</p>
