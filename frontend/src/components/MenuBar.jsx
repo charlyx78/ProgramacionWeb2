@@ -15,7 +15,7 @@ export const MenuBar = () => {
         <MenuBarItem url='/feed' icon='house'>Feed</MenuBarItem>
         <MenuBarItem url='/search' icon='search'>Search</MenuBarItem>
         <MenuBarItem url={`/profile/${userLogged.id}`} icon='person'>Profile</MenuBarItem>
-        <MenuBarItem url='/contacts' icon='chat'>Notifications</MenuBarItem>
+        <MenuBarItem url='/contacts' icon='chat'>Chats</MenuBarItem>
         <NavLink to='create-post' className='btn btn-primary mt-4 ms-3'>Create Post</NavLink>
         <hr className='ms-3' />
         <div className="ps-3">
