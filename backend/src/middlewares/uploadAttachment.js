@@ -26,7 +26,7 @@ export const uploadFiles = multer({
 });
 
 export const handleUpload = async (req, res, next) => {
-    uploadFiles.single('file')(req, res, async function(err) {
+    uploadFiles.single('attachment')(req, res, async function(err) {
         if (err) {
             return res.status(400).send({ message: 'Error uploading file', error: err.message });
         }

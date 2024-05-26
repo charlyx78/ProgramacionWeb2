@@ -24,7 +24,10 @@ const upload = multer({
     limits: {
         fileSize: 1024 * 1024 * 200
     }
-}).single('file'); // Asumiendo que el campo del formulario es 'file'
+}).fields([
+    { name: 'picture', maxCount: 1 },
+    { name: 'cover_picture', maxCount: 1 }
+]);
 
 export const uploadFiles = (req, res, next) => {
     upload(req, res, async function(err) {

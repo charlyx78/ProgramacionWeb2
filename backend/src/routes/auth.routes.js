@@ -3,16 +3,13 @@ import { login, logout, register, profile, verifyToken, hasFollow, follow, unfol
 import { authRequired } from '../middlewares/validateToken.js'
 import { validateSchema } from "../middlewares/validator.middleware.js";
 import { registerSchema, loginSchema } from "../schemas/auth.schema.js";
-import { handleUpload } from "../middlewares/uploadProfilePicture.js";
+import { uploadFiles } from "../middlewares/uploadProfilePicture.js";
 import { createTagIfNotExists } from '../middlewares/createTagIfNotExists.js'
 
 const router = Router()
 
 router.post('/register', 
-handleUpload.fields([
-        { name: 'picture', maxCount: 1 },
-        { name: 'cover_picture', maxCount: 1 }
-    ]),
+    uploadFiles,
     createTagIfNotExists,
     register
 )
