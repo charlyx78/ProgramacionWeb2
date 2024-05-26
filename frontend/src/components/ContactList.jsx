@@ -35,7 +35,7 @@ export const ContactList = () => {
       socket.on(`contacts-${userLogged.id}`, async(socketContacts) => {
         console.log(socketContacts.contacts)
 
-        const newContacts = await Promise.all(socketContacts.map(async (idUserContact) => {
+        const newContacts = await Promise.all(socketContacts.contacts.map(async (idUserContact) => {
           return await getUserData(idUserContact)
         }))
 
