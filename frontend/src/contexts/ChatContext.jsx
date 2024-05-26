@@ -34,7 +34,7 @@ export const ChatProvider = ({ children }) => {
   const getContacts = async() => {
     try {
       const res = await getContactsRequest()
-      return res.data.contacts
+      return res.data
     } catch (error) {
       return setErrors([error.response.data])
     }

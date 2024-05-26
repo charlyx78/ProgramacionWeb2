@@ -77,11 +77,11 @@ export const getMessages = async (req, res) => {
 
 export const getContacts = async (req, res) => {
     try {
-        const userFound = await User.findOne({ _id: req.user.id }).populate('contacts')
-        if(!userFound) return res.status(404).json({ message: "User not found "})
+        const contacts = await User.findById(req.user.id).select('contacts')
+        if(!contacts) return res.status(404).json({ message: "User not found "})
     
         res.status(200).json({ 
-            contacts: userFound._id
+            contacts
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
