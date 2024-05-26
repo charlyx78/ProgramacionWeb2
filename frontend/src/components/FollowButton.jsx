@@ -60,7 +60,7 @@ export const FollowButton = ({ user, setFollowers = null }) => {
             <NavLink to={'/profile-settings'} className='btn btn-outline-light btn-sm'>
                   Edit profile
             </NavLink>
-            <button className="btn btn-outline-danger" onClick={signOut}>Log Out</button>
+            <button className="btn btn-outline-danger btn-sm" onClick={signOut}>Log Out</button>
           </div>
         ) : (
           !hasFollow == true ? (
