@@ -1,37 +1,70 @@
 import { UserImage } from './UserImage'
-import { useEffect, useState } from 'react'
-import React from 'react'
-import { formatDate } from '../logic/formatDate'
-import { useAuth } from '../contexts/AuthContext'
+import { useState } from 'react'
+import React, {useEffect} from 'react'
+import { IMAGE_FILES_PERMITTED, VIDEO_FILES_PERMITTED } from '../constants/mimeTypes'
+import { getTimePassedFromDate } from '../logic/GetTimePassedFromDate'
+import { usePosts } from '../contexts/PostsContext'
+import { NavLink } from 'react-router-dom'
+import socketIOClient from 'socket.io-client'
+import { ENDPOINT } from '../constants/endpoint'
 
-export const Post = ({ post }) => {
-   
-  const [user, setUser] = useState({})
+export const Post = ({ post: postView, isReply = false }) => {
+
+  const { like, findLike } = usePosts()
+
+  const [hasLike, setHasLike] = useState(false)
   
-  const { getUserData } = useAuth()
-  
+  const [post, setPost] = useState(postView)
+
   const [showCompleteText, setShowCompleteText] = useState(false)
-  
+
+  const handleLike = async() => {
+    await like(post._id)
+  }
+
   useEffect(() => {
-    async function getUser() {
-      const userFound = await getUserData({ id: post.user })
-      setUser(userFound)
+    async function getHasLike() {
+      const hasLikeSearch = await findLike(post._id) 
+      hasLikeSearch.message ? setHasLike(true) : setHasLike(false)
     }
-    getUser()
+
+    getHasLike()
+
+    try {
+      const socket = socketIOClient(ENDPOINT)
     
-  }, [post.user])
+      socket.on(`add-like-${post._id}`, updatedPost => {
+        setPost(updatedPost)
+        getHasLike()
+      })
+      socket.on(`add-comment-${post._id}`, updatedPost => {
+        setPost(updatedPost)
+        getHasLike()
+      })
+    
+      return () => {
+        socket.disconnect()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
+
 
   return (
-    <div className="card post-container border-0 border-top border-bottom rounded-0">
-      <div className="card-header d-flex align-items-center gap-3 bg-body border-0">
-        <UserImage sourceImage={`http://localhost:3000/${user.picture}`} width='36px' height='36px' />
+    <div className="card bg-body-tertiary post-container border-0 rounded" data-aos='zoom-in-up'>
+      <div className="card-header d-flex align-items-center gap-3 bg-body-tertiary border-0">
+        <UserImage sourceImage={`${ENDPOINT}/${post.user.picture}`} width='36px' height='36px' />
         <div className="d-flex flex-column">
-          <p className='m-0 fw-bold text-break' title='Carlos Adrian Ruiz Hernandez'>{user.name} {user.lastname}</p>
-          <p className='m-0 text-muted fw-light text-nowrap post-username'>@{user.username}</p>
+          <a href={`/profile/${post.user._id}`} className='m-0 fw-bold text-break text-decoration-none text-body' title='Carlos Adrian Ruiz Hernandez'>{post.user.name} {post.user.lastname}</a>
+          <p className='m-0 text-muted fw-light text-nowrap post-username'>@{post.user.username}</p>
         </div>
-        <p className='ms-auto text-muted fw-light m-0'>{formatDate(post.createdAt)}</p>
+        <p className='ms-auto text-muted fw-light d-flex align-items-center gap-2'>
+          <i className='bi bi-clock'></i> 
+          <span>{getTimePassedFromDate(post.createdAt).value}{getTimePassedFromDate(post.createdAt).unit}</span>
+        </p>
       </div>
-      <div className="card-body py-2">
+      <div className="card-body py-0">
         <p className='m-0'>
           {showCompleteText ? post.content : post.content.substring(0, 250)}
           {post.content.length > 250 && (
@@ -41,20 +74,26 @@ export const Post = ({ post }) => {
           )}
         </p>    
 
-        {/* <div className='threadPoster-filePreview-container mt-3'>
-    <img src={reactLogo} alt='File post' className='threadPoster-filePreview rounded border' />
-  </div> */}
+        <div className='threadPoster-filePreview-container mt-3'>
+          {IMAGE_FILES_PERMITTED.includes(post.attachmentType) && (
+            <img src={`${ENDPOINT}/${post.attachment}`} alt='File post' className='threadPoster-filePreview rounded border' />
+          )}
+          {VIDEO_FILES_PERMITTED.includes(post.attachmentType) && (
+            <video src={`${ENDPOINT}/${post.attachment}`} alt='File post' controls autoPlay loop className='threadPoster-filePreview rounded border' />
+          )}
+        </div>
 
       </div>
-      <div className="card-footer bg-body border-0">
+      <div className="card-footer bg-body-tertiary border-0">
         <div className="d-flex gap-4 post-buttons-container">
-          <button className='post-button' title='Like'><i className='bi bi-heart'></i> {post.likes}</button>
-          <button className='post-button' title='Comments'><i className='bi bi-chat'></i> {post.comments}</button>
+          <button className='post-button' title='Like'><i className={`bi ${hasLike ? 'bi-heart-fill text-danger' : 'bi-heart'}`} onClick={handleLike}></i> {post.likes}</button>
+          {!isReply && (
+            <NavLink to={`/post/${post._id}`} className='post-button text-decoration-none' title='Comments'>
+              <i className='bi bi-chat'></i> {post.comments}
+            </NavLink>
+          )}
           <button className='post-button' title='Shared'><i className='bi bi-share'></i> {post.shareds}</button>
-          {/* <button className='post-button' title='Saved'><i className='bi bi-bookmark'></i> 112</button>   */}
           <section className="d-none d-md-flex gap-4">
-            {/* <button className='post-button' title='Seen'><i className='bi bi-bar-chart'></i> 112</button>  
-      <button className='post-button' title='Sended'><i className='bi bi-send'></i></button> */}
           </section>
         </div>
       </div>

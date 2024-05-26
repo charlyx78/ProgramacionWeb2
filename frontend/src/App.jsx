@@ -1,8 +1,10 @@
 import React from 'react'
 import { Toaster } from 'react-hot-toast'
 import { Outlet } from 'react-router-dom'
+import AOS from 'aos'
 
 function App () {
+  AOS.init()
   return (
     <>
       <Outlet />

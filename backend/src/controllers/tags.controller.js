@@ -6,6 +6,8 @@ export const createTag = async(tag) => {
             name
         } = tag
 
+        console.log(tag)
+
         const tagFound = await Tag.findOne({ name })
         if(tagFound) return ({
             message: "Tag already exists"

@@ -1,15 +1,20 @@
 import { Router } from "express"
 import { authRequired } from "../middlewares/validateToken.js"
-import { uploadFiles } from "../middlewares/uploadFiles.js"
-import { getPosts, getPost, createPost, replyPost, updatePost, deletePost } from "../controllers/posts.controller.js"
+import { uploadFiles } from "../middlewares/uploadAttachment.js"
+import { createTagIfNotExists } from "../middlewares/createTagIfNotExists.js"
+import { getPost, createPost, replyPost, updatePost, deletePost, addLike, getReplies, getProfilePosts, getTagsPosts, getFollowPosts, hasLike } from "../controllers/posts.controller.js"
 
 const router = Router()
 
-router.get('/posts', authRequired, getPosts)
+router.get('/posts-tags', authRequired, getTagsPosts)
+router.get('/posts-followed', authRequired, getFollowPosts)
+router.get('/profile-posts/:id', authRequired, getProfilePosts)
 router.get('/posts/:id', authRequired, getPost)
-router.post('/posts', authRequired, uploadFiles.single('attachment'), createPost)
-router.post('/posts/:id', authRequired, uploadFiles.single('attachment'), replyPost)
-router.delete('/posts/:id', authRequired, deletePost )
-// router.put('/posts/:id', authRequired, deletePost)
+router.post('/posts', authRequired, uploadFiles.single('attachment'), createTagIfNotExists, createPost)
+router.post('/posts/:id', authRequired, uploadFiles.single('attachment'), createTagIfNotExists, replyPost)
+router.delete('/posts/:id', authRequired, deletePost)
+router.get('/posts/find-like/:id', authRequired, hasLike)
+router.post('/posts/like/:id', authRequired, addLike)
+router.get('/posts/replies/:id', authRequired, getReplies)
 
 export default router

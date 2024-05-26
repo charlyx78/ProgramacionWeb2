@@ -1,30 +1,45 @@
-import app from "./app.js";
-import { connectDB } from "./db.js";
+import app from "./app.js"
+import { connectDB } from "./db.js"
+import { createServer } from 'http'
+import { Server } from 'socket.io'
 
-// const app = express();
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-// });
-// app.use(bodyParser.json())
-
-// app.post('/login', (req, res) => {
-//     const {name, pass} = req.body;
-
-//     console.log(req.body)
-
-//     if(name == 'sami' && pass == '123'){
-//         res.status(200).send();
-//     }
-//     else{
-//         res.status(402).send();
-//     }
-    
-// });
+const PORT = process.env.PORT || 3000;
 
 connectDB();
 
-app.listen(3000, () => {
+const server = createServer(app);
+export const io = new Server(server, {
+    cors: {
+        origin: ['https://programacion-web2-self.vercel.app', 'https://www.pw2-diceapp.com', 'http://localhost:5173'],
+        credentials: true
+    },
+    pingTimeout: 60000
+});
+
+server.listen(PORT, () => {
     console.log('App listening on port 3000');
+});
+
+io.on('connection', (socket) => {
+    console.log('Connected to Socket.IO');
+    
+    socket.on('joinRoom', ({ userId1, userId2 }) => {
+        const roomId = [userId1, userId2].sort().join('-');
+        console.log(`Joined room: ${roomId}`);
+        socket.join(roomId);
+    });
+
+    socket.on('leaveRoom', (roomId) => {
+        socket.leave(roomId);
+        console.log(`Leaving room: ${roomId}`);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Client disconnected');
+    });
+});
+
+
+io.on('error', (error) => {
+    console.error('Error en la conexión de Socket.IO:', error);
 });

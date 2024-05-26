@@ -11,6 +11,18 @@ const postSchema = new mongoose.Schema({
         type: String,
         default: null
     }, 
+    attachmentType: {
+        type: String,
+        default: null
+    }, 
+    tags: [
+        {
+            name: {
+                type: String,
+                ref: 'Tag'
+            }
+        }
+    ],
     likes: {
         type: Number,
         default: 0
@@ -34,11 +46,6 @@ const postSchema = new mongoose.Schema({
         ref: "Post",
         default: null
     },
-    tags: [{
-        type: String,
-        maxlength: 50,
-        default: null
-    }],
     status: {
         type: String,
         enum: ["active", "inactive"],

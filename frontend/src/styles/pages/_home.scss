@@ -6,7 +6,9 @@
     }
     @media (min-width: 960px) {
         .home-content {
+            width: 80%;
             display: grid;
+            grid-gap: 3em;
             grid-template-columns: 1fr 3fr 1fr;
         }
     }

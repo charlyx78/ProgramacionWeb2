@@ -1,7 +1,9 @@
+import { ENDPOINT } from '../constants/endpoint'
+
 /** Funcion para validar si el nombre de usuario ya existe en la base de datos o no */
 export const validateUserName = (userName) => {
   return new Promise((resolve, reject) => {
-    fetch(`http://localhost:3000/users?userName=${userName}`).then((res) => {
+    fetch(`http://${ENDPOINT}/users?userName=${userName}`).then((res) => {
       if (!res) {
         throw new Error(res)
       }
