@@ -14,7 +14,7 @@ export const findFollowRequest = (userId) => axios.get(`/find-follow/${userId}`)
 export const followRequest = (userId) => axios.post(`/follow/${userId}`)
 export const unfollowRequest = (userId) => axios.post(`/unfollow/${userId}`)
 
-export const verifyTokenRequest = () => axios.get('/verify')
+export const verifyTokenRequest = (token) => axios.get('/verify', token)
 
 export const getUser = (id) => axios.get(`/profile/${id}`)
 
