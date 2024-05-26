@@ -92,7 +92,7 @@ export const Post = ({ post: postView, isReply = false }) => {
               <i className='bi bi-chat'></i> {post.comments}
             </NavLink>
           )}
-          <button className='post-button' title='Shared'><i className='bi bi-share'></i> {post.shareds}</button>
+          {/* <button className='post-button' title='Shared'><i className='bi bi-share'></i> {post.shareds}</button> */}
           <section className="d-none d-md-flex gap-4">
           </section>
         </div>

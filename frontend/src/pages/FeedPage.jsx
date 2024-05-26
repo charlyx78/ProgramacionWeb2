@@ -37,7 +37,7 @@ export const FeedPage = () => {
   } else {
     return (
       <main className='bg-body-primary'>
-        <div className='d-flex flex-column gap-3 pt-3 feed-container'>
+        <div className='d-flex flex-column gap-3 pt-3 pb-5 feed-container'>
           {/* POSTER DEl HOME */}
           <PostFormLink />
           {postsFeed.map((post) => {

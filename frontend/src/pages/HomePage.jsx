@@ -16,7 +16,7 @@ export const HomePage = () => {
 
   return (
     <div className='home-container'>
-      <NavBarTop></NavBarTop>
+      {/* <NavBarTop></NavBarTop> */}
       <div className="home-content container-lg">
         <MenuBar />
         <Outlet />
