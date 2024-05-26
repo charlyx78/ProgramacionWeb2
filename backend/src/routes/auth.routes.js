@@ -30,10 +30,7 @@ router.get('/profile/:id', authRequired, profile)
 
 router.put('/profile', 
 authRequired,
-uploadFiles.fields([
-    { name: 'picture', maxCount: 1 },
-    { name: 'cover_picture', maxCount: 1 }
-]),
+uploadFiles,
 createTagIfNotExists,
 updateProfile)
 
