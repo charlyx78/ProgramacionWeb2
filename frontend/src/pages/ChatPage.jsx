@@ -55,9 +55,9 @@ export const ChatPage = () => {
     if (!userLogged || !user) return
 
     const socket = socketIOClient(ENDPOINT)
-    const roomId = [userLogged._id, user.id].sort().join('-')
+    const roomId = [userLogged.id, user.id].sort().join('-')
 
-    socket.emit('joinRoom', { userId1: userLogged._id, userId2: user.id })
+    socket.emit('joinRoom', { userId1: userLogged.id, userId2: user.id })
 
     socket.on('updateMessages', (newMessages) => {
       setMessages(newMessages)
@@ -94,8 +94,8 @@ export const ChatPage = () => {
               <p className='text-center py-3'>Messages not found, start a conversation with {user.name}!</p>
             ) : (
               messages.map((message, index) => (
-                <div className={message.sender._id === userLogged._id ? 'd-flex flex-column gap-2 align-items-end' : 'd-flex flex-column gap-2 align-items-start'} key={message._id}>
-                  <div className={message.sender._id === userLogged._id ? 'card bg-primary border-0 message-container' : 'card bg-secondary message-container'}>
+                <div className={message.sender._id === userLogged.id ? 'd-flex flex-column gap-2 align-items-end' : 'd-flex flex-column gap-2 align-items-start'} key={message._id}>
+                  <div className={message.sender._id === userLogged.id ? 'card bg-primary border-0 message-container' : 'card bg-secondary message-container'}>
                     <div className="card-body py-2">
                       {message.content}
                     </div>
