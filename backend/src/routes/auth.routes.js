@@ -9,7 +9,10 @@ import { createTagIfNotExists } from '../middlewares/createTagIfNotExists.js'
 const router = Router()
 
 router.post('/register', 
-    uploadFiles,
+    uploadFiles.fields([
+        { name: 'picture', maxCount: 1 },
+        { name: 'cover_picture', maxCount: 1 }
+    ]),
     createTagIfNotExists,
     register
 )
@@ -30,7 +33,10 @@ router.get('/profile/:id', authRequired, profile)
 
 router.put('/profile', 
 authRequired,
-uploadFiles,
+uploadFiles.fields([
+    { name: 'picture', maxCount: 1 },
+    { name: 'cover_picture', maxCount: 1 }
+]),
 createTagIfNotExists,
 updateProfile)
 

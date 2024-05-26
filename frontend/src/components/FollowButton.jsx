@@ -51,11 +51,10 @@ export const FollowButton = ({ user, setFollowers = null }) => {
     return <div>Loading...</div> // Mostrar un mensaje de carga si user no está definido
   }
 
-
   return (
     <>
       {
-        user.id === userLogged._id ? (
+        user.id === userLogged.id ? (
           <NavLink to={'/profile-settings'} className='btn btn-outline-light btn-sm'>
                   Edit profile
           </NavLink>
