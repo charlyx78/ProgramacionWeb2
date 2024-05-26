@@ -56,7 +56,7 @@ export const ContactList = () => {
     )
   } else {
     return (
-      <ul className='list-group'>
+      <ul className='list-group list-group-flush'>
         {contacts.map((contact, index) => (
           <div className="list-group-item p-0" key={index}>
             <ProfileCard user={contact} isContact></ProfileCard>

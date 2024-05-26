@@ -106,7 +106,8 @@ export const login = async (req, res) => {
                 following: userFound.following,
                 createdAt: userFound.createdAt,
                 updatedAt: userFound.updatedAt,
-            }
+            },
+            token: token
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -338,7 +339,7 @@ export const updateProfile = async (req, res) => {
 }
 
 export const verifyToken = async(req, res) => {
-    const {token} = req.cookies
+    const {token} = req.body
     if(!token) return res.status(401).json({message: "Unauthorized"})
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, user) => {
         if(err) return res.status(401).json({message: "Unauthorized"})
