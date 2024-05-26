@@ -63,7 +63,7 @@ export const ProfilePage = () => {
               <h5 className='m-0 text-center'>Posts</h5>
             </div>
           </div>
-          <div className='account-content d-flex flex-column gap-3'>
+          <div className='account-content d-flex flex-column gap-3 pb-5'>
             {
               posts.map((post, index) => (
                 <Post post={post} key={index}></Post>

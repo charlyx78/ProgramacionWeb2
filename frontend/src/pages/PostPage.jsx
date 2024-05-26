@@ -25,7 +25,6 @@ export const PostPage = () => {
   useEffect(() => {
     async function getPostById() {
       const newPost = await getPost(postId)
-      console.log(newPost)
       setPost(newPost)
 
       const newReplies = await getReplies(postId)
@@ -74,7 +73,7 @@ export const PostPage = () => {
             <br />
             <PostForm isReplying idPostRelying={post._id}></PostForm>
             <br />
-            <div className="section post-replies d-flex flex-column gap-3">
+            <div className="section post-replies d-flex flex-column gap-3 pb-5">
               {replies.map((reply, index) => {
                 return (
                   <Post post={reply} isReply key={index}></Post>

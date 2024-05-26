@@ -13,8 +13,6 @@ import toast from 'react-hot-toast'
 
 export const SignUpPage = () => {
 
-  const navigate = useNavigate()
-
   const { register, handleSubmit, formState: { errors }, setValue } = useForm()
 
   const { signUp, isAuthenticated, errors: registerErrors } = useAuth()
@@ -81,15 +79,19 @@ export const SignUpPage = () => {
     <TagsForm register={register} errors={errors} {...data} updateFields={updateFields} />,
   ])
 
+  const navigate = useNavigate()
+
   return (
-    <main className='signup-container container padding-top-content'>
+    <main className='signup-container container py-3'>
       <form 
         onSubmit={ onSubmit }
         encType='multipart/form-data'
       >
         <div className='signup-content'>
-
           <div className='signup-content-header'>
+            <button onClick={()=>{navigate(-1)}} className='btn btn-icon'>
+              <i className="bi bi-arrow-left fs-3 me-3"></i>
+            </button>
             <h3 className='fw-bold m-0 text-center'>Create your account</h3>
             <div className='progress' role='progressbar' aria-label='Basic example' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style={{ height: '2px' }}>
               <div className='progress-bar bg-primary' style={{ width: `${((currentStepIndex) / steps.length) * 100}%` }} />

@@ -35,7 +35,7 @@ export const LoginPage = () => {
 
       <aside className='login-background-container'>
         <div className='login-background-content'>
-          <h1 className='text-light m-0'>Trendingverse</h1>
+          <h1 className='text-light m-0'>Dice App</h1>
           <h2 className='text-light mb-0'>Stay ahead, stay informed</h2>
           <p className='text-light m-0'>Developed by Team 2 for the PW2 assignment</p>
           <ul className='d-flex gap-2 m-0'>
@@ -48,7 +48,7 @@ export const LoginPage = () => {
       </aside>
 
       <div className='login-content'>
-        <h1 className='logo text-primary fs-3 d-lg-none'>Trendingverse</h1>
+        <h1 className='logo text-primary fs-3 d-lg-none'>Dice App</h1>
         <h3 className='fw-bold mb-3 text-start fs-2'>Hi, Welcome Back!👋</h3>
         <form className='d-flex flex-column w-100 gap-4' onSubmit={onSubmit}>
           <div className='form-field'>
