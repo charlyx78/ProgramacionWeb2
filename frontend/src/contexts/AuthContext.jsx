@@ -54,6 +54,7 @@ export const AuthProvider = ({ children }) => {
       await logoutRequest()
       setIsAuthenticated(false)
       setUser(null)
+      sessionStorage.removeItem('jwt')
     } catch (error) {
       if(Array.isArray(error.response.data)) {
         return setErrors(error.response.data)
@@ -125,6 +126,8 @@ export const AuthProvider = ({ children }) => {
           const res = await verifyTokenRequest({
             token: cookie
           })
+
+          console.log(res)
 
           if(!res.data) {
             setIsAuthenticated(false)

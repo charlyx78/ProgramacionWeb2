@@ -340,6 +340,7 @@ export const updateProfile = async (req, res) => {
 
 export const verifyToken = async(req, res) => {
     const {token} = req.body
+    console.log(req.body)
     if(!token) return res.status(401).json({message: "Unauthorized"})
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, user) => {
         if(err) return res.status(401).json({message: "Unauthorized"})
