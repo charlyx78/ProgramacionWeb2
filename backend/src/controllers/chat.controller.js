@@ -77,7 +77,7 @@ export const getMessages = async (req, res) => {
 
 export const getContacts = async (req, res) => {
     try {
-        const userFound = await User.findOne({ _id: req.params.id }).populate('contacts')
+        const userFound = await User.findOne({ _id: req.user.id }).populate('contacts')
         if(!userFound) return res.status(404).json({ message: "User not found "})
     
         res.status(200).json({ 
