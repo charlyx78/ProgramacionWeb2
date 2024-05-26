@@ -4,4 +4,6 @@ export const sendMessageRequest = (message) => axios.post(`/message/${message.re
 
 export const getMessagesRequest = (userId) => axios.get(`/message/${userId}`)
 
+export const getContactsRequest = () => axios.get('/contacts')
+
 

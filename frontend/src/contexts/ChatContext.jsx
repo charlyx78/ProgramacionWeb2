@@ -1,5 +1,5 @@
 import { React, createContext, useState, useContext } from 'react'
-import { getMessagesRequest, sendMessageRequest } from '../api/chat.js'
+import { getContactsRequest, getMessagesRequest, sendMessageRequest } from '../api/chat.js'
 
 export const ChatContext = createContext()
 
@@ -31,8 +31,17 @@ export const ChatProvider = ({ children }) => {
     }
   }
 
+  const getContacts = async() => {
+    try {
+      const res = await getContactsRequest()
+      return res.data.contacts.contacts
+    } catch (error) {
+      return setErrors([error.response.data])
+    }
+  }
+
   return (
-    <ChatContext.Provider value={{ sendMessage, getMessages, errors }}>
+    <ChatContext.Provider value={{ sendMessage, getMessages, getContacts, errors }}>
       {children}
     </ChatContext.Provider>
   )

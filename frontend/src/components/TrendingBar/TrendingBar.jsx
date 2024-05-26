@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { TrendsCard } from './Trends/TrendsCard'
+import { ContactList } from '../ContactList'
 
 export const TrendingBar = () => {
   return (
@@ -12,7 +12,10 @@ export const TrendingBar = () => {
             to='/search'>
               Search...
           </NavLink>
-          {/* <TrendsCard></TrendsCard> */}
+          <section>
+            <h5>Chats</h5>
+            <ContactList></ContactList>
+          </section>
         </div>
       </div>
     </>

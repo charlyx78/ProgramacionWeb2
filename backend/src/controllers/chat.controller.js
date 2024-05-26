@@ -1,5 +1,6 @@
 import Message from "../models/message.model.js";
 import { io } from "../index.js"
+import User from '../models/user.model.js'
 
 export const sendMessage = async (req, res) => {
     const {
@@ -12,6 +13,26 @@ export const sendMessage = async (req, res) => {
             sender: req.user.id,
             receiver: req.params.id
         })
+
+        const previousMessages = await Message.find({
+            $or: [
+                { sender: req.user.id, receiver: req.params.id },
+                { sender: req.params.id, receiver: req.user.id }
+            ]
+        });
+
+        if (previousMessages.length === 0) {
+            await User.findByIdAndUpdate(req.user.id, {
+                $addToSet: { contacts: req.params.id }
+            });
+
+            await User.findByIdAndUpdate(req.params.id, {
+                $addToSet: { contacts: req.user.id }
+            });
+        }
+
+        const contacts = await User.findById(req.user.id).select('contacts')
+        io.emit(`contacts-${req.user.id}`, contacts) 
 
         const messageSaved = await newMessage.save()
 
@@ -54,5 +75,18 @@ export const getMessages = async (req, res) => {
         })
     } catch (error) {
         res.status(500).json({ message: error.message })
+    }
+}
+
+export const getContacts = async (req, res) => {
+    try {
+        const contacts = await User.findById(req.user.id).select('contacts')
+        if(!contacts) return res.status(404).json({ message: "User not found "})
+    
+        res.status(200).json({ 
+            contacts
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 }

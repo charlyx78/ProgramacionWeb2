@@ -1,15 +1,65 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ProfileCard } from './ProfileCard'
 import { useAuth } from '../contexts/AuthContext'
+import { useChat } from '../contexts/ChatContext'
+import socketIOClient from 'socket.io-client'
+import { ENDPOINT } from '../constants/endpoint'
+
 
 export const ContactList = () => {
 
-  const { user: userLogged } = useAuth()
+  const { getContacts } = useChat()
+  const { getUserData, user: userLogged } = useAuth()
 
+  const [contacts, setContacts] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  return (
-    <ul className='list-group'>
-      {/* <ProfileCard user={}></ProfileCard> */}
-    </ul>
-  )
+  useEffect(() => {
+    async function getData() {
+      const idUserContacts = await getContacts()
+
+      const newContacts = await Promise.all(idUserContacts.map(async (idUserContact) => {
+        return await getUserData(idUserContact)
+      }))
+
+      setContacts(newContacts)
+
+      setLoading(false)
+    }
+
+    getData()
+
+    try {
+      const socket = socketIOClient(ENDPOINT)
+    
+      socket.on(`contacts-${userLogged.id}`, newContacts => {
+        console.log(newContacts)
+        setContacts(newContacts)
+      })
+    
+      return () => {
+        socket.disconnect()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
+
+  if (!contacts && loading) {
+    return (
+      <p>Loading...</p>
+    )
+  } else {
+    return (
+      <ul className='list-group'>
+        {contacts.map((contact, index) => (
+          <div className="list-group-item p-0" key={index}>
+            <ProfileCard user={contact} isContact></ProfileCard>
+          </div>
+        ))
+        }
+      </ul>
+    )
+  }
+
 }
