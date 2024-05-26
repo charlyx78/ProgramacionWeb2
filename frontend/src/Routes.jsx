@@ -14,6 +14,7 @@ import { SearchPage } from './pages/SearchPage'
 import { CreatePostPage } from './pages/CreatePostPage'
 import { PostPage } from './pages/PostPage'
 import { ChatPage } from './pages/ChatPage'
+import { ContactsPage } from './pages/ContactsPage'
 
 export const Routes = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const Routes = createBrowserRouter([
           {
             path: 'profile/:userId',
             element: <ProfilePage />
+          },
+          {
+            path: 'contacts',
+            element: <ContactsPage />
           },
           {
             path: 'chat/:userId',
