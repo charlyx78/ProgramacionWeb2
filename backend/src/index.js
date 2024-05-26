@@ -10,7 +10,7 @@ connectDB();
 const server = createServer(app);
 export const io = new Server(server, {
     cors: {
-        origin: ['https://programacion-web2-self.vercel.app', 'https://www.pw2-diceapp.com', 'http://http://localhost:5173'],
+        origin: ['https://programacion-web2-self.vercel.app', 'https://www.pw2-diceapp.com', 'http://localhost:5173/login'],
         credentials: true
     },
     pingTimeout: 60000
