@@ -33,9 +33,7 @@ export const ContactList = () => {
       const socket = socketIOClient(ENDPOINT)
     
       socket.on(`contacts-${userLogged.id}`, newContacts => {
-        setContacts(newContacts)
-      })
-      socket.on(`contacts-${userLogged.id}`, newContacts => {
+        console.log(newContacts)
         setContacts(newContacts)
       })
     
