@@ -34,7 +34,7 @@ export const ProfileSettingsPage = () => {
   useEffect(() => {
 
     async function getUser() {
-      const userData = await getUserData(userLogged._id)
+      const userData = await getUserData(userLogged.id)
       setUser(userData)
 
       if(!userData) navigate('/*')

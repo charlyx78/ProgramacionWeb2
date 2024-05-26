@@ -55,7 +55,7 @@ export const FollowButton = ({ user, setFollowers = null }) => {
   return (
     <>
       {
-        user.id === userLogged._id ? (
+        user.id === userLogged.id ? (
           <NavLink to={'/profile-settings'} className='btn btn-outline-light btn-sm'>
                   Edit profile
           </NavLink>
