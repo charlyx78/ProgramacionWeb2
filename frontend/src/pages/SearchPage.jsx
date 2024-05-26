@@ -70,7 +70,7 @@ export const SearchPage = () => {
           {noUsers && (
             <p className='text-center mb-0'>No results available</p>    
           )}
-          <div className="d-flex flex-column gap-3">
+          <div className="d-flex flex-column gap-3 pb-5">
             {searchResultsUser.map((user) => {
               return (
                 <ProfileCard key={user._id} user={user}>
@@ -87,7 +87,7 @@ export const SearchPage = () => {
           {noPosts && (
             <p className='text-center mb-0'>No results available</p>    
           )}
-          <div className="d-flex flex-column gap-3">
+          <div className="d-flex flex-column gap-3 pb-5">
             {searchResultsPost.map((post) => {
               return (
                 <Post post={post} key={post._id}></Post>

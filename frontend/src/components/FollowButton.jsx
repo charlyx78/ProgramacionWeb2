@@ -7,7 +7,7 @@ import { ENDPOINT } from '../constants/endpoint'
 
 export const FollowButton = ({ user, setFollowers = null }) => {
 
-  const { findFollow, follow, unfollow, user: userLogged } = useAuth()
+  const { findFollow, follow, unfollow, user: userLogged, signOut } = useAuth()
 
   const [hasFollow, setHasFollow] = useState()
 
@@ -56,9 +56,12 @@ export const FollowButton = ({ user, setFollowers = null }) => {
     <>
       {
         user.id === userLogged.id ? (
-          <NavLink to={'/profile-settings'} className='btn btn-outline-light btn-sm'>
+          <div className="d-flex gap-3">
+            <NavLink to={'/profile-settings'} className='btn btn-outline-light btn-sm'>
                   Edit profile
-          </NavLink>
+            </NavLink>
+            <button className="btn btn-outline-danger" onClick={signOut}>Log Out</button>
+          </div>
         ) : (
           !hasFollow == true ? (
             <button className='btn btn-outline-light btn-sm' onClick={followUser}>
