@@ -13,6 +13,7 @@ export const ContactList = () => {
   useEffect(() => {
     async function getData() {
       const data = await getContacts()
+      console.log(data)
       if (data) {
         setLoading(false)
         setContacts(data)
