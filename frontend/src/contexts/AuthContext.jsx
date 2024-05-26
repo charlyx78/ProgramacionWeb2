@@ -70,7 +70,6 @@ export const AuthProvider = ({ children }) => {
 
   const updateProfile = async(user) => {
     try {
-      console.log(user)
       const updatedProfile = await updateProfileRequest(user)
       return updatedProfile.data
     } catch (error) {

@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { ProfileCard } from './ProfileCard'
 import { useAuth } from '../contexts/AuthContext'
+import { useChat } from '../contexts/ChatContext'
 
 export const ContactList = () => {
 
-  const { user: userLogged, getUserData } = useAuth()
+  const  { getContacts } = useChat()
 
-  const [user, setUSer] = useState(null)
+  const [contacts, setContacts] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function getData() {
-      const data = await getUserData(userLogged.id)
+      const data = await getContacts()
       if (data) {
         setLoading(false)
-        setUSer(data)
+        setContacts(data)
       }
     }
 
     getData()
-  }, [userLogged])
+  }, [])
 
-  if (!user && loading) {
+  if (!contacts && loading) {
     return (
       <p>Loading...</p>
     )

@@ -74,3 +74,16 @@ export const getMessages = async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 }
+
+export const getContacts = async (req, res) => {
+    try {
+        const userFound = await User.findOne({ _id: req.params.id }).populate('contacts')
+        if(!userFound) return res.status(404).json({ message: "User not found "})
+    
+        res.status(200).json({ 
+            contacts: userFound.contacts
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
