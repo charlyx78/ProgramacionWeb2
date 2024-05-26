@@ -1,5 +1,6 @@
 import Message from "../models/message.model.js";
 import { io } from "../index.js"
+import User from '../models/user.model.js'
 
 export const sendMessage = async (req, res) => {
     const {
