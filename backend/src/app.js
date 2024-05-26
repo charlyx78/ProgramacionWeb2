@@ -15,7 +15,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: ['https://programacion-web2-self.vercel.app', 'https://www.pw2-diceapp.com', 'http://localhost:5173/login'],
+    origin: ['https://programacion-web2-self.vercel.app', 'https://www.pw2-diceapp.com', 'http://localhost:5173'],
     credentials: true
 }))
 
