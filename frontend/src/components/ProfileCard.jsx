@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { NavLink } from 'react-router-dom'
 import { ENDPOINT } from '../constants/endpoint'
 
-export const ProfileCard = ({user}) => {
+export const ProfileCard = ({user, isContact = false}) => {
 
   const { signOut, user: userLogged } = useAuth()
 
@@ -19,8 +19,8 @@ export const ProfileCard = ({user}) => {
   if(user && !loading) {
     return (
       <div className='position-relative'>
-        <NavLink className='card bg-transparent text-decoration-none' to={`/profile/${user && user._id ? user._id : user.id}`} onClick={() => setShowDropdown(!showDropdown)}>
-          <div className="card-body d-flex align-items-center py-2 gap-3 px-3">
+        <NavLink className='card bg-transparent border-0 text-decoration-none' to={isContact ? `/chat/${user.id}` : `/profile/${user && user._id ? user._id : user.id}`} onClick={() => setShowDropdown(!showDropdown)}>
+          <div className="card-body d-flex align-items-center gap-3">
             <UserImage sourceImage={`${ENDPOINT}/${user.picture}`} width='40px' height='40px' />
             <div className='d-flex flex-column align-items-start'>
               <p className='mb-0 fw-semibold'>{user.name} {user.last_name}</p>

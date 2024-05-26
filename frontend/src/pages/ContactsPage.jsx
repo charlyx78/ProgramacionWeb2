@@ -6,7 +6,7 @@ export const ContactsPage = () => {
   return (
     <>
       <PageHeader>
-        Your contacts
+        <h5 className="m-0">Your contacts</h5>
       </PageHeader>
       <main className='container-fluid py-3'>
         <ContactList>

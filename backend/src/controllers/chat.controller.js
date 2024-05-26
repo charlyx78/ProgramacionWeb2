@@ -31,6 +31,9 @@ export const sendMessage = async (req, res) => {
             });
         }
 
+        const contacts = await User.findById(req.user.id).select('contacts')
+        io.emit(`contacts-${req.user.id}`, contacts) 
+
         const messageSaved = await newMessage.save()
 
         const messages = await Message.find({
