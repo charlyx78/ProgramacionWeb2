@@ -13,6 +13,23 @@ export const sendMessage = async (req, res) => {
             receiver: req.params.id
         })
 
+        const previousMessages = await Message.find({
+            $or: [
+                { sender: req.user.id, receiver: req.params.id },
+                { sender: req.params.id, receiver: req.user.id }
+            ]
+        });
+
+        if (previousMessages.length === 0) {
+            await User.findByIdAndUpdate(req.user.id, {
+                $addToSet: { contacts: req.params.id }
+            });
+
+            await User.findByIdAndUpdate(req.params.id, {
+                $addToSet: { contacts: req.user.id }
+            });
+        }
+
         const messageSaved = await newMessage.save()
 
         const messages = await Message.find({
