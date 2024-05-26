@@ -35,6 +35,7 @@ export const FollowButton = ({ user, setFollowers = null }) => {
       console.log(error)
     }
   }, [user])
+  
 
   const followUser = async() => {
     await follow(user.id)
@@ -54,7 +55,7 @@ export const FollowButton = ({ user, setFollowers = null }) => {
   return (
     <>
       {
-        user.id === userLogged.id ? (
+        user.id === userLogged._id ? (
           <NavLink to={'/profile-settings'} className='btn btn-outline-light btn-sm'>
                   Edit profile
           </NavLink>
