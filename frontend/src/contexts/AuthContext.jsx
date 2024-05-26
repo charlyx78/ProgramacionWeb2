@@ -111,8 +111,9 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     async function checkLogin() {
-      const cookie = sessionStorage.getItem('jwt')
-      if(!cookie) {
+      const token = sessionStorage.getItem('jwt')
+      
+      if(!token) {
 
         setIsAuthenticated(false)
         setLoading(false)
@@ -124,10 +125,8 @@ export const AuthProvider = ({ children }) => {
         try {
 
           const res = await verifyTokenRequest({
-            token: cookie
+            token
           })
-
-          console.log(res)
 
           if(!res.data) {
             setIsAuthenticated(false)

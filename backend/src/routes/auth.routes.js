@@ -27,7 +27,7 @@ router.post('/unfollow/:id', authRequired, unfollow)
 
 router.post('/logout', logout)
 
-router.get('/verify', verifyToken)
+router.post('/verify', verifyToken)
 
 router.get('/profile/:id', authRequired, profile)
 
