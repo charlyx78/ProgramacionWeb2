@@ -22,6 +22,8 @@ export const AuthProvider = ({ children }) => {
 
   const [userView, setUserView] = useState(null)
 
+  const [token, setToken] = useState(null)
+
   const signUp = async(user) => {
     try {
       const res = await registerRequest(user)
@@ -37,6 +39,8 @@ export const AuthProvider = ({ children }) => {
       const res = await loginRequest(user)
       setIsAuthenticated(true)
       setUser(res.data.user)
+
+      sessionStorage.setItem('jwt', res.data.token)
     } catch (error) {
       if(Array.isArray(error.response.data)) {
         return setErrors(error.response.data)
@@ -106,23 +110,32 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     async function checkLogin() {
-      const cookies = Cookies.get()
-      if(!cookies.token) {
+      const cookie = sessionStorage.getItem('jwt')
+      if(!cookie) {
+
         setIsAuthenticated(false)
         setLoading(false)
         return setUser(null)
+        
       }
       else {
+
         try {
-          const res = await verifyTokenRequest(cookies.token)
+
+          const res = await verifyTokenRequest({
+            token: cookie
+          })
+
           if(!res.data) {
             setIsAuthenticated(false)
             setLoading(false)
             return
           }
+
           setIsAuthenticated(true)
           setUser(res.data)
           setLoading(false)
+
         } catch (error) {
           setIsAuthenticated(false)
           setUser(null)
