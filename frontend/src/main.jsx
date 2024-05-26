@@ -13,15 +13,13 @@ import './styles/main.scss'
 import 'aos/dist/aos.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <PostProvider>
-        <ChatProvider>
-          <SearchProvider>
-            <RouterProvider router={Routes} />
-          </SearchProvider>
-        </ChatProvider>
-      </PostProvider>
-    </AuthProvider>
-  </React.StrictMode>
+  <AuthProvider>
+    <PostProvider>
+      <ChatProvider>
+        <SearchProvider>
+          <RouterProvider router={Routes} />
+        </SearchProvider>
+      </ChatProvider>
+    </PostProvider>
+  </AuthProvider>
 )

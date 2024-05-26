@@ -13,7 +13,7 @@ export const NavBarBottom = () => {
           <MenuBarItem url='/feed' icon='house'></MenuBarItem>
           <MenuBarItem url='/search' icon='search'></MenuBarItem>
           <MenuBarItem url='/create-post' icon='plus-circle'></MenuBarItem>
-          <MenuBarItem url={`/profile/${userLogged._id}`} icon='person'></MenuBarItem>
+          <MenuBarItem url={`/profile/${userLogged.id}`} icon='person'></MenuBarItem>
           <MenuBarItem url='/notifications' icon='bell'></MenuBarItem>
 
         </ul>
