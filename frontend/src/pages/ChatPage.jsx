@@ -95,7 +95,7 @@ export const ChatPage = () => {
             ) : (
               messages.map((message, index) => (
                 <div className={message.sender._id === userLogged.id ? 'd-flex flex-column gap-2 align-items-end' : 'd-flex flex-column gap-2 align-items-start'} key={message._id}>
-                  <div className={message.sender._id === userLogged.id ? 'card bg-primary border-0 message-container' : 'card bg-secondary message-container'}>
+                  <div className={message.sender._id === userLogged.id ? 'card bg-primary border-0 message-container rounded-pill' : 'card bg-secondary message-container rounded-pill'}>
                     <div className="card-body py-2">
                       {message.content}
                     </div>

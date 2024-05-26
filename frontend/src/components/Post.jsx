@@ -7,6 +7,8 @@ import { usePosts } from '../contexts/PostsContext'
 import { NavLink } from 'react-router-dom'
 import socketIOClient from 'socket.io-client'
 import { ENDPOINT } from '../constants/endpoint'
+import error404 from '../assets/error404.png'
+
 
 export const Post = ({ post: postView, isReply = false }) => {
 
@@ -76,7 +78,11 @@ export const Post = ({ post: postView, isReply = false }) => {
 
         <div className='threadPoster-filePreview-container mt-3'>
           {IMAGE_FILES_PERMITTED.includes(post.attachmentType) && (
-            <img src={`${ENDPOINT}/${post.attachment}`} alt='File post' className='threadPoster-filePreview rounded border' />
+            <img src={`${ENDPOINT}/${post.attachment}`} alt='File post' className='threadPoster-filePreview rounded border'
+              onError={(e) => {
+                e.target.src = error404
+              }} 
+            />
           )}
           {VIDEO_FILES_PERMITTED.includes(post.attachmentType) && (
             <video src={`${ENDPOINT}/${post.attachment}`} alt='File post' controls autoPlay loop className='threadPoster-filePreview rounded border' />

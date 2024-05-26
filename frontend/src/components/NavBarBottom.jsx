@@ -14,8 +14,7 @@ export const NavBarBottom = () => {
           <MenuBarItem url='/search' icon='search'></MenuBarItem>
           <MenuBarItem url='/create-post' icon='plus-circle'></MenuBarItem>
           <MenuBarItem url={`/profile/${userLogged.id}`} icon='person'></MenuBarItem>
-          <MenuBarItem url='/notifications' icon='bell'></MenuBarItem>
-
+          <MenuBarItem url='/contacts' icon='chat'></MenuBarItem>
         </ul>
       </div>
     </nav>
